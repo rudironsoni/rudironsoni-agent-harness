@@ -1,0 +1,17 @@
+{
+    "$schema": "https://github.com/dyoshikawa/rulesync/releases/latest/download/permissions-schema.json",
+    "permission": {
+      "bash": {
+        "git *": "allow",
+        "npm run *": "allow",
+        "rm -rf *": "ask",
+        "*": "ask"
+      },
+      "edit": {
+        "src/**": "allow"
+      },
+      "read": {
+        ".env": "deny"
+      }
+    }
+  }
