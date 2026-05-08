@@ -1,31 +1,62 @@
 {
   "$schema": "https://github.com/dyoshikawa/rulesync/releases/latest/download/config-schema.json",
-  "targets": [
-    "copilot",
-    "claudecode",
-    "codexcli",
-    "geminicli",
-    "opencode",
-    "antigravity",
-    "factorydroid"
-  ],
-  "features": [
-    "rules",
-    "ignore",
-    "mcp",
-    "commands",
-    "subagents",
-    "skills",
-    "hooks"
-  ],
-  "baseDirs": [
+  "targets": {
+    "agentsmd": [
+      "*"
+    ],
+    "agentsskills": [
+      "*"
+    ],
+    "cursor": [
+      "*"
+    ],
+    "claudecode": [
+      "*"
+    ],
+    "opencode": [
+      "*"
+    ],
+    "pi": [
+      "*"
+    ],
+    "copilot": [
+      "*"
+    ],
+    "codexcli": [
+      "*"
+    ],
+    "geminicli": [
+      "*"
+    ],
+    "antigravity": [
+      "*"
+    ],
+    "factorydroid": [
+      "*"
+    ]
+  },
+  "outputRoots": [
     "."
   ],
-  "delete": false,
+  "delete": true,
   "verbose": true,
   "silent": false,
   "global": true,
   "simulateCommands": false,
   "simulateSubagents": false,
-  "simulateSkills": false
+  "simulateSkills": false,
+  "gitignoreTargetsOnly": true,
+    // Declarative skill sources — installed via 'rulesync install'
+  // See the "Declarative Skill Sources" section for details.
+  "sources": [
+    {
+      "source": "dyoshikawa/rulesync"
+    },
+    {
+      "source": "kepano/obsidian-skills"
+    },
+    {
+      "source": "cocoindex-io/cocoindex-code"
+    }
+  ]
 }

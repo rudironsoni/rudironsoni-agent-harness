@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+docker_args=(exec)
+
+if [[ "${1-}" == "mcp" ]]; then
+  docker_args+=(-i)
+else
+  docker_args+=(-it)
+fi
+
+docker_args+=(
+  -e
+  "COCOINDEX_CODE_HOST_CWD=${COCOINDEX_CODE_HOST_CWD:-$PWD}"
+  cocoindex-code
+  ccc
+)
+
+exec docker "${docker_args[@]}" "$@"
