@@ -3,10 +3,13 @@
   "mcpServers": {
     "Atlassian-MCP-Server": {
       "url": "https://mcp.atlassian.com/v1/mcp/authv2",
-      "type": "sse",
+      "type": "http",
       "headers": {
-        "Authorization": "Basic {env:ATLASSIAN_MCP_SERVER_API_TOKEN}"
-      }
+        "Authorization": "Basic ${env:ATLASSIAN_MCP_SERVER_API_TOKEN}"
+      },
+      "targets": [
+        "cursor"
+      ]
     },
     "cocoindex-code": {
       "type": "stdio",
@@ -15,14 +18,17 @@
         "mcp"
       ],
       "env": {
-        "COCOINDEX_CODE_HOST_CWD": "{env:PWD}"
-      }
+        "COCOINDEX_CODE_HOST_CWD": "${workspaceFolder}"
+      },
+      "targets": [
+        "cursor"
+      ]
     },
     "github": {
       "type": "http",
       "url": "https://api.githubcopilot.com/mcp/",
       "headers": {
-        "Authorization": "Bearer {env:GITHUB_MCP_SERVER_API_TOKEN}"
+        "Authorization": "Bearer ${env:GITHUB_MCP_SERVER_API_TOKEN}"
       }
     }
   }
