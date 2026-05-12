@@ -1,0 +1,43 @@
+{
+  "lockfileVersion": 1,
+  "sources": {
+    "dyoshikawa/rulesync": {
+      "requestedRef": "main",
+      "resolvedRef": "200b8e5846b891af77e992870c8ca894d61e3dc0",
+      "resolvedAt": "2026-05-12T12:57:10.107Z",
+      "skills": {}
+    },
+    "kepano/obsidian-skills": {
+      "requestedRef": "main",
+      "resolvedRef": "ac9398734fe719565809f7a6048b05c36b1ca38f",
+      "resolvedAt": "2026-05-12T12:57:16.524Z",
+      "skills": {
+        "defuddle": {
+          "integrity": "sha256-538dd8aaa673910e8b75a13a8a401b63b28a5a1c392374052191fd72b6e7017a"
+        },
+        "json-canvas": {
+          "integrity": "sha256-b530b7d3363caf52d71a633b10965759004be6dac898b909d07e8202861e4506"
+        },
+        "obsidian-bases": {
+          "integrity": "sha256-207a578020af7df520d0889adb1de9a4916d081ed9d186032c845207f82239a8"
+        },
+        "obsidian-cli": {
+          "integrity": "sha256-58fec9d58ebc0c4ddbbdecf49a43fbdb2748b81729382708f84269fa84104564"
+        },
+        "obsidian-markdown": {
+          "integrity": "sha256-addfa88fec5dba91f97718e60ba1b11f842e79cd97c33ffdac252c4442d29ca1"
+        }
+      }
+    },
+    "cocoindex-io/cocoindex-code": {
+      "requestedRef": "main",
+      "resolvedRef": "cc55f32cd7a3f0a176be6b8418c1a3b91c94ea7e",
+      "resolvedAt": "2026-05-12T12:57:19.334Z",
+      "skills": {
+        "ccc": {
+          "integrity": "sha256-2786de683fb66a5736d8d28c6b96ce6beb8167ff2fd5726929b8d23643b26fb7"
+        }
+      }
+    }
+  }
+}
