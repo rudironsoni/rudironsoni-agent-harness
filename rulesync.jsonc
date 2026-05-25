@@ -50,13 +50,22 @@
   // See the "Declarative Skill Sources" section for details.
   "sources": [
     {
-      "source": "dyoshikawa/rulesync"
+      "source": "dyoshikawa/rulesync",
+      "skills": [
+        "rulesync"
+      ]
     },
     {
       "source": "kepano/obsidian-skills"
     },
     {
       "source": "cocoindex-io/cocoindex-code"
+    },
+    {
+      "source": "blader/humanizer",
+      "skills": [
+        "humanizer"
+      ]
     },
     {
       "source": "mattpocock/skills:skills/productivity",
