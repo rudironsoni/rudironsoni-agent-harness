@@ -46,7 +46,7 @@
   "simulateSubagents": false,
   "simulateSkills": false,
   "gitignoreTargetsOnly": true,
-    // Declarative skill sources — installed via 'rulesync install'
+  // Declarative skill sources — installed via 'rulesync install'
   // See the "Declarative Skill Sources" section for details.
   "sources": [
     {
@@ -57,6 +57,34 @@
     },
     {
       "source": "cocoindex-io/cocoindex-code"
+    },
+    {
+      "source": "mattpocock/skills:skills/productivity",
+      "skills": [
+        "write-a-skill",
+        "handoff"
+      ]
+    },
+    {
+      "source": "mattpocock/skills:skills/personal",
+      "skills": [
+        "edit-article",
+        "obsidian-vault"
+      ]
+    },
+    {
+      "source": "mattpocock/skills:skills/engineering",
+      "skills": [
+        "grill-with-docs",
+        "improve-codebase-architecture",
+        "prototype",
+        "tdd",
+        "to-issues",
+        "to-prd",
+        "triage",
+        "zoom-out",
+        "diagnose"
+      ]
     }
   ]
 }
