@@ -1,16 +1,20 @@
 {
   "lockfileVersion": 1,
   "sources": {
-    "dyoshikawa/rulesync:skills/rulesync": {
+    "dyoshikawa/rulesync": {
       "requestedRef": "main",
       "resolvedRef": "2e32bcc481d49b7711ef9ce07d9d0353c36fdc47",
-      "resolvedAt": "2026-05-25T18:47:52.890Z",
-      "skills": {}
+      "resolvedAt": "2026-05-25T18:48:53.562Z",
+      "skills": {
+        "rulesync": {
+          "integrity": "sha256-354cdfda8c2f2df8d0de04faec3ddc777d3dce3246ca9cd48b603de9f667ac0a"
+        }
+      }
     },
     "kepano/obsidian-skills": {
       "requestedRef": "main",
       "resolvedRef": "553ef99aa3306dd23f268e1ba9af752577684f69",
-      "resolvedAt": "2026-05-25T18:47:59.178Z",
+      "resolvedAt": "2026-05-25T18:48:59.601Z",
       "skills": {
         "defuddle": {
           "integrity": "sha256-538dd8aaa673910e8b75a13a8a401b63b28a5a1c392374052191fd72b6e7017a"
@@ -32,7 +36,7 @@
     "cocoindex-io/cocoindex-code": {
       "requestedRef": "main",
       "resolvedRef": "e6a077fc60ea40d1906b335a837c4cb658bd6d76",
-      "resolvedAt": "2026-05-25T18:48:01.472Z",
+      "resolvedAt": "2026-05-25T18:49:01.972Z",
       "skills": {
         "ccc": {
           "integrity": "sha256-2786de683fb66a5736d8d28c6b96ce6beb8167ff2fd5726929b8d23643b26fb7"
@@ -42,7 +46,7 @@
     "mattpocock/skills:skills/productivity": {
       "requestedRef": "main",
       "resolvedRef": "b8be62ffacb0118fa3eaa29a0923c87c8c11985c",
-      "resolvedAt": "2026-05-25T18:48:04.276Z",
+      "resolvedAt": "2026-05-25T18:49:04.565Z",
       "skills": {
         "handoff": {
           "integrity": "sha256-478ba7f43732eb37517839d1360c630bc645a1eac6f39737cb3fb38d22a1194b"
@@ -55,7 +59,7 @@
     "mattpocock/skills:skills/personal": {
       "requestedRef": "main",
       "resolvedRef": "b8be62ffacb0118fa3eaa29a0923c87c8c11985c",
-      "resolvedAt": "2026-05-25T18:48:06.114Z",
+      "resolvedAt": "2026-05-25T18:49:06.311Z",
       "skills": {
         "edit-article": {
           "integrity": "sha256-6cf84cab687a059a11a147c2536ed1f3fa13e088d9e70683954695c1b66cf08c"
@@ -68,7 +72,7 @@
     "mattpocock/skills:skills/engineering": {
       "requestedRef": "main",
       "resolvedRef": "b8be62ffacb0118fa3eaa29a0923c87c8c11985c",
-      "resolvedAt": "2026-05-25T18:48:16.286Z",
+      "resolvedAt": "2026-05-25T18:49:17.504Z",
       "skills": {
         "diagnose": {
           "integrity": "sha256-9e8a25a0dfc2da80a0867158a65a15368740bbe0ffec4126c7552b94b53d570f"

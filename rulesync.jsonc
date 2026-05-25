@@ -16,22 +16,10 @@
     "opencode": [
       "*"
     ],
-    "pi": [
-      "*"
-    ],
     "copilot": [
       "*"
     ],
     "codexcli": [
-      "*"
-    ],
-    "geminicli": [
-      "*"
-    ],
-    "antigravity": [
-      "*"
-    ],
-    "factorydroid": [
       "*"
     ]
   },
