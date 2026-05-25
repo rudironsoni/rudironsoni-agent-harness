@@ -3,14 +3,14 @@
   "sources": {
     "dyoshikawa/rulesync": {
       "requestedRef": "main",
-      "resolvedRef": "200b8e5846b891af77e992870c8ca894d61e3dc0",
-      "resolvedAt": "2026-05-12T12:57:10.107Z",
+      "resolvedRef": "2e32bcc481d49b7711ef9ce07d9d0353c36fdc47",
+      "resolvedAt": "2026-05-25T18:43:47.887Z",
       "skills": {}
     },
     "kepano/obsidian-skills": {
       "requestedRef": "main",
-      "resolvedRef": "ac9398734fe719565809f7a6048b05c36b1ca38f",
-      "resolvedAt": "2026-05-12T12:57:16.524Z",
+      "resolvedRef": "553ef99aa3306dd23f268e1ba9af752577684f69",
+      "resolvedAt": "2026-05-25T18:43:52.180Z",
       "skills": {
         "defuddle": {
           "integrity": "sha256-538dd8aaa673910e8b75a13a8a401b63b28a5a1c392374052191fd72b6e7017a"
@@ -31,11 +31,37 @@
     },
     "cocoindex-io/cocoindex-code": {
       "requestedRef": "main",
-      "resolvedRef": "cc55f32cd7a3f0a176be6b8418c1a3b91c94ea7e",
-      "resolvedAt": "2026-05-12T12:57:19.334Z",
+      "resolvedRef": "e6a077fc60ea40d1906b335a837c4cb658bd6d76",
+      "resolvedAt": "2026-05-25T18:43:54.316Z",
       "skills": {
         "ccc": {
           "integrity": "sha256-2786de683fb66a5736d8d28c6b96ce6beb8167ff2fd5726929b8d23643b26fb7"
+        }
+      }
+    },
+    "mattpocock/skills:skills/productivity": {
+      "requestedRef": "main",
+      "resolvedRef": "b8be62ffacb0118fa3eaa29a0923c87c8c11985c",
+      "resolvedAt": "2026-05-25T18:43:55.680Z",
+      "skills": {
+        "handoff": {
+          "integrity": "sha256-478ba7f43732eb37517839d1360c630bc645a1eac6f39737cb3fb38d22a1194b"
+        },
+        "write-a-skill": {
+          "integrity": "sha256-03840258378476cbefa13fd3f7bf70db93ec1c3cdd7d0dc4edb9431e71a2a24d"
+        }
+      }
+    },
+    "mattpocock/skills:skills/personal": {
+      "requestedRef": "main",
+      "resolvedRef": "b8be62ffacb0118fa3eaa29a0923c87c8c11985c",
+      "resolvedAt": "2026-05-25T18:43:56.734Z",
+      "skills": {
+        "edit-article": {
+          "integrity": "sha256-6cf84cab687a059a11a147c2536ed1f3fa13e088d9e70683954695c1b66cf08c"
+        },
+        "obsidian-vault": {
+          "integrity": "sha256-1e34caaa182c3e70be80aad679952bd0850e76c257a3f24bd7118bebfbec6c72"
         }
       }
     }
