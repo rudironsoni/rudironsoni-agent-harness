@@ -1,4 +1,34 @@
 {
   "version": 1,
-  "hooks": {}
+  "hooks": {},
+  "cursor": {
+    "hooks": {
+      "preToolUse": [
+        {
+          "command": "rtk hook cursor",
+          "matcher": "Shell"
+        }
+      ]
+    }
+  },
+  "claudecode": {
+    "hooks": {
+      "preToolUse": [
+        {
+          "command": "rtk hook claude",
+          "matcher": "Shell"
+        }
+      ]
+    }
+  },
+  "copilot": {
+    "hooks": {
+      "preToolUse": [
+        {
+          "command": "rtk hook cursor",
+          "matcher": "Shell"
+        }
+      ]
+    }
+  }
 }
