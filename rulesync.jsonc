@@ -16,7 +16,7 @@
     "opencode": [
       "*"
     ],
-    "copilot": [
+    "copilotcli": [
       "*"
     ],
     "codexcli": [
