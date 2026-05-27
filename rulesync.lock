@@ -3,18 +3,18 @@
   "sources": {
     "dyoshikawa/rulesync": {
       "requestedRef": "main",
-      "resolvedRef": "dc0df17b98e77d2ce291e022dbf65c8db2e60178",
-      "resolvedAt": "2026-05-26T13:24:25.107Z",
+      "resolvedRef": "f14fc85837b5f14760d3f1e9ac42e4cc657ad652",
+      "resolvedAt": "2026-05-27T12:27:08.816Z",
       "skills": {
         "rulesync": {
-          "integrity": "sha256-354cdfda8c2f2df8d0de04faec3ddc777d3dce3246ca9cd48b603de9f667ac0a"
+          "integrity": "sha256-a9e17dd47c03bccbcff304ed82aaa1a5ebab3b23d9a2219f941b47f912898fa3"
         }
       }
     },
     "kepano/obsidian-skills": {
       "requestedRef": "main",
       "resolvedRef": "553ef99aa3306dd23f268e1ba9af752577684f69",
-      "resolvedAt": "2026-05-26T13:24:29.723Z",
+      "resolvedAt": "2026-05-27T12:27:17.255Z",
       "skills": {
         "defuddle": {
           "integrity": "sha256-538dd8aaa673910e8b75a13a8a401b63b28a5a1c392374052191fd72b6e7017a"
@@ -36,10 +36,70 @@
     "cocoindex-io/cocoindex-code": {
       "requestedRef": "main",
       "resolvedRef": "e6a077fc60ea40d1906b335a837c4cb658bd6d76",
-      "resolvedAt": "2026-05-26T13:24:31.869Z",
+      "resolvedAt": "2026-05-27T12:27:20.707Z",
       "skills": {
         "ccc": {
           "integrity": "sha256-2786de683fb66a5736d8d28c6b96ce6beb8167ff2fd5726929b8d23643b26fb7"
+        }
+      }
+    },
+    "mattpocock/skills:skills/productivity": {
+      "requestedRef": "main",
+      "resolvedRef": "b8be62ffacb0118fa3eaa29a0923c87c8c11985c",
+      "resolvedAt": "2026-05-27T12:27:23.993Z",
+      "skills": {
+        "handoff": {
+          "integrity": "sha256-478ba7f43732eb37517839d1360c630bc645a1eac6f39737cb3fb38d22a1194b"
+        },
+        "write-a-skill": {
+          "integrity": "sha256-03840258378476cbefa13fd3f7bf70db93ec1c3cdd7d0dc4edb9431e71a2a24d"
+        }
+      }
+    },
+    "mattpocock/skills:skills/personal": {
+      "requestedRef": "main",
+      "resolvedRef": "b8be62ffacb0118fa3eaa29a0923c87c8c11985c",
+      "resolvedAt": "2026-05-27T12:27:26.644Z",
+      "skills": {
+        "edit-article": {
+          "integrity": "sha256-6cf84cab687a059a11a147c2536ed1f3fa13e088d9e70683954695c1b66cf08c"
+        },
+        "obsidian-vault": {
+          "integrity": "sha256-1e34caaa182c3e70be80aad679952bd0850e76c257a3f24bd7118bebfbec6c72"
+        }
+      }
+    },
+    "mattpocock/skills:skills/engineering": {
+      "requestedRef": "main",
+      "resolvedRef": "b8be62ffacb0118fa3eaa29a0923c87c8c11985c",
+      "resolvedAt": "2026-05-27T12:27:40.842Z",
+      "skills": {
+        "diagnose": {
+          "integrity": "sha256-9e8a25a0dfc2da80a0867158a65a15368740bbe0ffec4126c7552b94b53d570f"
+        },
+        "grill-with-docs": {
+          "integrity": "sha256-239939bf31313e6de6ca84e78cb77e1dc0011157a1dcf62594e495b0ada34b12"
+        },
+        "improve-codebase-architecture": {
+          "integrity": "sha256-326e2a53c622d19509f2b0c32111b4d8cb208eb3df1bd1dd8671308708bc245b"
+        },
+        "prototype": {
+          "integrity": "sha256-76829cdb04f2cf3924e58f90d298a2e39029a3031f76f68131dbe5ae9a9a3f83"
+        },
+        "tdd": {
+          "integrity": "sha256-9a25970955327737d80d256e7bc2a39ceec96191b01d027eb21124e640c96e1e"
+        },
+        "to-issues": {
+          "integrity": "sha256-3fc7c307251c4f08a50326236e7e70faffe1dadb99ee35a3d854b1b7a0b79418"
+        },
+        "to-prd": {
+          "integrity": "sha256-a9a42e82d98fc26a289ee525b29af933b81a5b937f58284bda69128c88e49b3d"
+        },
+        "triage": {
+          "integrity": "sha256-4e735cfcce7f614cef6849ba5cec4355cb6d42e507601e63cfbd707dd0be9c1c"
+        },
+        "zoom-out": {
+          "integrity": "sha256-34f4bab271b9b9bbad01e08413d5a096ec84d1ee983d747de9219f77afc5e897"
         }
       }
     }
