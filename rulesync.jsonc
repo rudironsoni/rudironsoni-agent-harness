@@ -23,9 +23,6 @@
       "*"
     ]
   },
-  "inputRoots": [
-    "."
-  ],
   "outputRoots": [
     "."
   ],
