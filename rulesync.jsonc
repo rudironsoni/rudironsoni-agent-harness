@@ -50,10 +50,7 @@
       "source": "cocoindex-io/cocoindex-code"
     },
     {
-      "source": "blader/humanizer",
-      "skills": [
-        "humanizer"
-      ]
+      "source": "blader/humanizer"
     },
     {
       "source": "mattpocock/skills:skills/productivity",
