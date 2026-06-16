@@ -59,7 +59,8 @@
       "source": "mattpocock/skills:skills/productivity",
       "skills": [
         "write-a-skill",
-        "handoff"
+        "handoff",
+        "teach"
       ]
     },
     {
