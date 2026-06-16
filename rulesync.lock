@@ -3,18 +3,18 @@
   "sources": {
     "dyoshikawa/rulesync": {
       "requestedRef": "main",
-      "resolvedRef": "f14fc85837b5f14760d3f1e9ac42e4cc657ad652",
-      "resolvedAt": "2026-05-27T12:27:08.816Z",
+      "resolvedRef": "44ddc9cc5ea1c57f22e7fb22bef62d53c1ac4b2f",
+      "resolvedAt": "2026-06-16T10:08:35.200Z",
       "skills": {
         "rulesync": {
-          "integrity": "sha256-a9e17dd47c03bccbcff304ed82aaa1a5ebab3b23d9a2219f941b47f912898fa3"
+          "integrity": "sha256-e4d7269425d389b65e6ae93e023db455a56c89eb832737ccbd39bba934a0f601"
         }
       }
     },
     "kepano/obsidian-skills": {
       "requestedRef": "main",
-      "resolvedRef": "553ef99aa3306dd23f268e1ba9af752577684f69",
-      "resolvedAt": "2026-05-27T12:27:17.255Z",
+      "resolvedRef": "a1dc48e68138490d522c04cbf5822214c6eb1202",
+      "resolvedAt": "2026-06-16T10:08:41.242Z",
       "skills": {
         "defuddle": {
           "integrity": "sha256-538dd8aaa673910e8b75a13a8a401b63b28a5a1c392374052191fd72b6e7017a"
@@ -23,33 +23,46 @@
           "integrity": "sha256-b530b7d3363caf52d71a633b10965759004be6dac898b909d07e8202861e4506"
         },
         "obsidian-bases": {
-          "integrity": "sha256-207a578020af7df520d0889adb1de9a4916d081ed9d186032c845207f82239a8"
+          "integrity": "sha256-83e988a6a4eec9a06c8668199b8f1a4189324346cbc50a73ef1948f80d85a60d"
         },
         "obsidian-cli": {
           "integrity": "sha256-58fec9d58ebc0c4ddbbdecf49a43fbdb2748b81729382708f84269fa84104564"
         },
         "obsidian-markdown": {
-          "integrity": "sha256-addfa88fec5dba91f97718e60ba1b11f842e79cd97c33ffdac252c4442d29ca1"
+          "integrity": "sha256-eeaf2e16446fe6aa0c6e2e50dc84d6301de1647c44e43b37e018f8814bf8f3ae"
         }
       }
     },
     "cocoindex-io/cocoindex-code": {
       "requestedRef": "main",
-      "resolvedRef": "e6a077fc60ea40d1906b335a837c4cb658bd6d76",
-      "resolvedAt": "2026-05-27T12:27:20.707Z",
+      "resolvedRef": "c98f8cccb8598818459c549dc35eddb88b7f1d14",
+      "resolvedAt": "2026-06-16T10:08:43.604Z",
       "skills": {
         "ccc": {
-          "integrity": "sha256-2786de683fb66a5736d8d28c6b96ce6beb8167ff2fd5726929b8d23643b26fb7"
+          "integrity": "sha256-e16e05ce4e22a925dff59cb1bb1e2b152f39a367f448536ab283f10c8a31acdf"
+        }
+      }
+    },
+    "blader/humanizer": {
+      "requestedRef": "main",
+      "resolvedRef": "9600f2b7241cb4eed6ad803abee5ea01d67fe8e4",
+      "resolvedAt": "2026-06-16T10:08:45.328Z",
+      "skills": {
+        "humanizer": {
+          "integrity": "sha256-8f5b3cf97bbbae0b5f12809395baea746d371d56d06f2cc8bdf9283d6d8fb88d"
         }
       }
     },
     "mattpocock/skills:skills/productivity": {
       "requestedRef": "main",
-      "resolvedRef": "b8be62ffacb0118fa3eaa29a0923c87c8c11985c",
-      "resolvedAt": "2026-05-27T12:27:23.993Z",
+      "resolvedRef": "694fa30311e02c2639942308513555e61ee84a6f",
+      "resolvedAt": "2026-06-16T10:08:49.000Z",
       "skills": {
         "handoff": {
           "integrity": "sha256-478ba7f43732eb37517839d1360c630bc645a1eac6f39737cb3fb38d22a1194b"
+        },
+        "teach": {
+          "integrity": "sha256-fbda130865354c53a8e3fc03255231edea01c33aa5e87cddc4e186dedcb4881a"
         },
         "write-a-skill": {
           "integrity": "sha256-03840258378476cbefa13fd3f7bf70db93ec1c3cdd7d0dc4edb9431e71a2a24d"
@@ -58,8 +71,8 @@
     },
     "mattpocock/skills:skills/personal": {
       "requestedRef": "main",
-      "resolvedRef": "b8be62ffacb0118fa3eaa29a0923c87c8c11985c",
-      "resolvedAt": "2026-05-27T12:27:26.644Z",
+      "resolvedRef": "694fa30311e02c2639942308513555e61ee84a6f",
+      "resolvedAt": "2026-06-16T10:08:51.207Z",
       "skills": {
         "edit-article": {
           "integrity": "sha256-6cf84cab687a059a11a147c2536ed1f3fa13e088d9e70683954695c1b66cf08c"
@@ -71,14 +84,14 @@
     },
     "mattpocock/skills:skills/engineering": {
       "requestedRef": "main",
-      "resolvedRef": "b8be62ffacb0118fa3eaa29a0923c87c8c11985c",
-      "resolvedAt": "2026-05-27T12:27:40.842Z",
+      "resolvedRef": "694fa30311e02c2639942308513555e61ee84a6f",
+      "resolvedAt": "2026-06-16T10:09:01.693Z",
       "skills": {
         "diagnose": {
           "integrity": "sha256-9e8a25a0dfc2da80a0867158a65a15368740bbe0ffec4126c7552b94b53d570f"
         },
         "grill-with-docs": {
-          "integrity": "sha256-239939bf31313e6de6ca84e78cb77e1dc0011157a1dcf62594e495b0ada34b12"
+          "integrity": "sha256-d21af3c2e0570cd9563a73780c9afb8d6ec70b77511152e67888eddd84d578fc"
         },
         "improve-codebase-architecture": {
           "integrity": "sha256-326e2a53c622d19509f2b0c32111b4d8cb208eb3df1bd1dd8671308708bc245b"
@@ -93,7 +106,7 @@
           "integrity": "sha256-3fc7c307251c4f08a50326236e7e70faffe1dadb99ee35a3d854b1b7a0b79418"
         },
         "to-prd": {
-          "integrity": "sha256-a9a42e82d98fc26a289ee525b29af933b81a5b937f58284bda69128c88e49b3d"
+          "integrity": "sha256-5b64d7b41eada249ec5b19e902dc0b3d52a23c6456bb8959cc9c1664a33564f3"
         },
         "triage": {
           "integrity": "sha256-4e735cfcce7f614cef6849ba5cec4355cb6d42e507601e63cfbd707dd0be9c1c"

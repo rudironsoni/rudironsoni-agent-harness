@@ -31,9 +31,9 @@ transition.
 
 | Feature     | `geminicli`                            | `antigravity-cli`                                                                           |
 | ----------- | -------------------------------------- | ------------------------------------------------------------------------------------------- |
-| rules       | root `GEMINI.md` + `.gemini/memories/` | root `GEMINI.md` + `.agents/rules/`; global `~/.gemini/GEMINI.md`                           |
+| rules       | root `GEMINI.md` + `.gemini/memories/` | root `AGENTS.md` + `.agents/rules/`; global `~/.gemini/GEMINI.md`                           |
 | skills      | `.gemini/skills/`                      | `.agents/skills/`; global `~/.gemini/antigravity-cli/skills/`                               |
-| mcp         | `.gemini/settings.json` (`mcpServers`) | `.agents/mcp_config.json`; global `~/.gemini/antigravity-cli/mcp_config.json`               |
+| mcp         | `.gemini/settings.json` (`mcpServers`) | `.agents/mcp_config.json`; global `~/.gemini/config/mcp_config.json` (shared config dir)    |
 | hooks       | `.gemini/` (Gemini hook shape)         | `.agents/hooks.json`; global `~/.gemini/config/hooks.json` (Claude-Code-like matcher shape) |
 | permissions | `.gemini/settings.json`                | global `~/.gemini/antigravity-cli/settings.json` (`permissions.allow`/`ask`/`deny`)         |
 | commands    | `.gemini/commands/` (TOML)             | **not yet supported** — Antigravity CLI exposes slash commands via skills                   |
@@ -41,22 +41,38 @@ transition.
 
 ### Notable differences
 
+- **Root rules file**: `antigravity-cli` emits the project root rule as the
+  cross-tool **`AGENTS.md`** (matching `antigravity-ide`), not `GEMINI.md`. The
+  CLI reads both, with the Gemini-lineage discovery order `AGENTS.md`,
+  `CONTEXT.md`, `GEMINI.md`. If you previously generated `antigravity-cli` output
+  and have a generated root `GEMINI.md`, rulesync no longer manages it — delete
+  the stale `GEMINI.md` manually after regenerating. Global scope is unchanged
+  (`~/.gemini/GEMINI.md`).
 - **MCP**: Antigravity uses `serverUrl` (not `url`) for HTTP servers and honors
   a `disabledTools` array. Rulesync emits the Antigravity-compatible shape
   automatically.
 - **Hooks**: Antigravity uses a Claude-Code-like `hooks.json` with a matcher
-  shape, **not** the Gemini CLI hook format. Rulesync currently translates the
-  `preToolUse`, `postToolUse`, and `stop` events for Antigravity.
+  shape, **not** the Gemini CLI hook format. The event map is nested under a
+  generated `rulesync` hook name (`{ "rulesync": { "<Event>": [...] } }`).
+  Rulesync translates five events for Antigravity: `preToolUse`, `postToolUse`,
+  `preModelInvocation` (→ `PreInvocation`), `postModelInvocation`
+  (→ `PostInvocation`), and `stop`; the model-invocation events and `stop` are
+  matcher-less handler lists.
 - **Permissions**: The Antigravity CLI reads permissions only from the global
   `~/.gemini/antigravity-cli/settings.json`; there is no documented
   workspace-scoped permissions file, so rulesync generates this file in
   **global mode only**. The canonical `bash` tool maps to Antigravity's
   `command` tool name.
 - **Commands / subagents**: These are intentionally out of scope for
-  `antigravity-cli` today. Antigravity surfaces slash commands through skills,
-  and CLI subagents are only definable through plugin bundles or the
-  `define_subagent` tool — neither maps cleanly onto rulesync's per-feature
-  model. Keep generating them with `geminicli` if you still rely on them.
+  `antigravity-cli` today. Antigravity surfaces slash commands through skills.
+  CLI subagents are defined and managed at runtime (the interactive `/agents`
+  panel and the orchestrator's `invoke_subagent` / `define_subagent` tools), and
+  the only file-based way to ship one is bundled inside a plugin (a namespaced
+  package of skills + subagents + rules + MCP + hooks). There is no standalone,
+  declarative per-agent file (analogous to `geminicli`'s `.gemini/agents/`) that
+  rulesync could generate, and the plugin bundle does not map cleanly onto
+  rulesync's per-feature model. Keep generating subagents with `geminicli` if
+  you still rely on them.
 
 ## Updating `rulesync.jsonc`
 
