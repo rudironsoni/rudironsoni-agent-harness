@@ -3,18 +3,18 @@
   "sources": {
     "dyoshikawa/rulesync": {
       "requestedRef": "main",
-      "resolvedRef": "44ddc9cc5ea1c57f22e7fb22bef62d53c1ac4b2f",
-      "resolvedAt": "2026-06-16T10:08:35.200Z",
+      "resolvedRef": "f1d13b197e61c01b7ed8e08fd93a78ed0ea4559c",
+      "resolvedAt": "2026-06-17T07:51:13.491Z",
       "skills": {
         "rulesync": {
-          "integrity": "sha256-e4d7269425d389b65e6ae93e023db455a56c89eb832737ccbd39bba934a0f601"
+          "integrity": "sha256-50f283524a7d7fda9f038d0a7a4bffec8346d9fed3a76f59f62bf616029e65f2"
         }
       }
     },
     "kepano/obsidian-skills": {
       "requestedRef": "main",
       "resolvedRef": "a1dc48e68138490d522c04cbf5822214c6eb1202",
-      "resolvedAt": "2026-06-16T10:08:41.242Z",
+      "resolvedAt": "2026-06-17T07:51:19.191Z",
       "skills": {
         "defuddle": {
           "integrity": "sha256-538dd8aaa673910e8b75a13a8a401b63b28a5a1c392374052191fd72b6e7017a"
@@ -36,7 +36,7 @@
     "cocoindex-io/cocoindex-code": {
       "requestedRef": "main",
       "resolvedRef": "c98f8cccb8598818459c549dc35eddb88b7f1d14",
-      "resolvedAt": "2026-06-16T10:08:43.604Z",
+      "resolvedAt": "2026-06-17T07:51:21.422Z",
       "skills": {
         "ccc": {
           "integrity": "sha256-e16e05ce4e22a925dff59cb1bb1e2b152f39a367f448536ab283f10c8a31acdf"
@@ -46,7 +46,7 @@
     "blader/humanizer": {
       "requestedRef": "main",
       "resolvedRef": "9600f2b7241cb4eed6ad803abee5ea01d67fe8e4",
-      "resolvedAt": "2026-06-16T10:08:45.328Z",
+      "resolvedAt": "2026-06-17T07:51:22.989Z",
       "skills": {
         "humanizer": {
           "integrity": "sha256-8f5b3cf97bbbae0b5f12809395baea746d371d56d06f2cc8bdf9283d6d8fb88d"
@@ -56,7 +56,7 @@
     "mattpocock/skills:skills/productivity": {
       "requestedRef": "main",
       "resolvedRef": "694fa30311e02c2639942308513555e61ee84a6f",
-      "resolvedAt": "2026-06-16T10:08:49.000Z",
+      "resolvedAt": "2026-06-17T07:51:25.981Z",
       "skills": {
         "handoff": {
           "integrity": "sha256-478ba7f43732eb37517839d1360c630bc645a1eac6f39737cb3fb38d22a1194b"
@@ -72,7 +72,7 @@
     "mattpocock/skills:skills/personal": {
       "requestedRef": "main",
       "resolvedRef": "694fa30311e02c2639942308513555e61ee84a6f",
-      "resolvedAt": "2026-06-16T10:08:51.207Z",
+      "resolvedAt": "2026-06-17T07:51:27.773Z",
       "skills": {
         "edit-article": {
           "integrity": "sha256-6cf84cab687a059a11a147c2536ed1f3fa13e088d9e70683954695c1b66cf08c"
@@ -85,7 +85,7 @@
     "mattpocock/skills:skills/engineering": {
       "requestedRef": "main",
       "resolvedRef": "694fa30311e02c2639942308513555e61ee84a6f",
-      "resolvedAt": "2026-06-16T10:09:01.693Z",
+      "resolvedAt": "2026-06-17T07:51:36.616Z",
       "skills": {
         "diagnose": {
           "integrity": "sha256-9e8a25a0dfc2da80a0867158a65a15368740bbe0ffec4126c7552b94b53d570f"
