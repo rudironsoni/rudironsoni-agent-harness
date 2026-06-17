@@ -62,7 +62,7 @@ This is Rulesync, a Node.js CLI tool that automatically generates configuration 
 
 ## `.rulesync/hooks.json`
 
-Hooks run scripts at lifecycle events (e.g. session start, before tool use). Events use **canonical camelCase** in this file, and Rulesync translates them per tool: Cursor uses them as-is; Claude Code, Factory Droid, Codex CLI, Gemini CLI, and Goose get PascalCase (with a few tool-specific name mappings) in their settings files; OpenCode and Kilo hooks are emitted as JavaScript plugins (`.opencode/plugins/rulesync-hooks.js`, `.kilo/plugins/rulesync-hooks.js`); Copilot and Copilot CLI map event names to their own camelCase (e.g. `beforeSubmitPrompt` → `userPromptSubmitted`, `stop` → `agentStop`, `afterError` → `errorOccurred`) and use `powershell`/`bash` command fields — Copilot CLI additionally covers a wider event set and supports `prompt` and `http` hook types beyond `command`; deepagents-cli uses a dot-notation (e.g. `session.start`, `tool.error`); Kiro emits hooks into `.kiro/agents/default.json` using Kiro's CLI event names (`agentSpawn`, `userPromptSubmit`, `preToolUse`, `postToolUse`, `stop`).
+Hooks run scripts at lifecycle events (e.g. session start, before tool use). Events use **canonical camelCase** in this file, and Rulesync translates them per tool: Cursor uses them as-is; Claude Code, Factory Droid, Codex CLI, Gemini CLI, and Goose get PascalCase (with a few tool-specific name mappings) in their settings files; OpenCode and Kilo hooks are emitted as JavaScript plugins (`.opencode/plugins/rulesync-hooks.js`, `.kilo/plugins/rulesync-hooks.js`); Copilot and Copilot CLI map event names to their own camelCase (e.g. `beforeSubmitPrompt` → `userPromptSubmitted`, `stop` → `agentStop`, `afterError` → `errorOccurred`) and use `powershell`/`bash` command fields — Copilot CLI additionally covers a wider event set and supports `prompt` and `http` hook types beyond `command`; deepagents-cli uses a dot-notation (e.g. `session.start`, `tool.error`); Kiro emits hooks into `.kiro/agents/default.json` using Kiro's CLI event names (`agentSpawn`, `userPromptSubmit`, `preToolUse`, `postToolUse`, `stop`); Qwen Code emits PascalCase events into the `hooks` key of `.qwen/settings.json` (its supported event set differs from Gemini CLI's).
 
 Example:
 
@@ -112,7 +112,7 @@ Example:
 
 - `version`: Schema version (currently `1`).
 - `hooks`: Map of canonical event names to an array of hook entries. These are dispatched to every tool that supports the given event.
-- `cursor.hooks`, `claudecode.hooks`, `opencode.hooks`, `kilo.hooks`, `copilot.hooks`, `copilotcli.hooks`, `factorydroid.hooks`, `geminicli.hooks`, `codexcli.hooks`, `goose.hooks`, `deepagents.hooks`, `kiro.hooks`: Tool-specific **override keys**. Entries under these keys are emitted only for the corresponding tool, so tool-only events (e.g. `afterFileEdit` for Cursor/OpenCode/Kilo, `worktreeCreate` for Claude Code, `afterError` for Copilot/Copilot CLI) can coexist with shared ones without leaking to other tools. `copilotcli.hooks` falls back to `copilot.hooks`, which in turn falls back to the shared `hooks` block.
+- `cursor.hooks`, `claudecode.hooks`, `opencode.hooks`, `kilo.hooks`, `copilot.hooks`, `copilotcli.hooks`, `factorydroid.hooks`, `geminicli.hooks`, `codexcli.hooks`, `goose.hooks`, `deepagents.hooks`, `kiro.hooks`, `qwencode.hooks`: Tool-specific **override keys**. Entries under these keys are emitted only for the corresponding tool, so tool-only events (e.g. `afterFileEdit` for Cursor/OpenCode/Kilo, `worktreeCreate` for Claude Code, `afterError` for Copilot/Copilot CLI) can coexist with shared ones without leaking to other tools. `copilotcli.hooks` falls back to `copilot.hooks`, which in turn falls back to the shared `hooks` block.
 
 **Hook entry keys:**
 
@@ -175,6 +175,7 @@ Events present in the shared `hooks` block but unsupported by a given tool are s
 > - **Antigravity IDE / Antigravity CLI** — project: `<project>/.agents/hooks.json`; global: `~/.gemini/config/hooks.json`. Both targets share the same dedicated `hooks.json` (a Claude-Code-style matcher map nested under a generated `rulesync` hook name), so enabling both writes the same file.
 > - **Devin Desktop (formerly Windsurf)** — project: `<project>/.windsurf/hooks.json`; global: `~/.codeium/windsurf/hooks.json`. The Cascade Hooks file location is unchanged by the Devin Desktop rebrand.
 > - **AugmentCode** — project: `<project>/.augment/settings.json`; global: `~/.augment/settings.json`. Hooks are merged under the top-level `hooks` key of the shared settings file (which also holds `toolPermissions`).
+> - **Vibe Code** — project: `<project>/.vibe/hooks.toml`; global: `~/.vibe/hooks.toml`. Hooks are **experimental** and require `enable_experimental_hooks = true` in `.vibe/config.toml` (or `VIBE_ENABLE_EXPERIMENTAL_HOOKS=true`); Rulesync merges this flag into the shared `.vibe/config.toml` without clobbering existing MCP/permissions settings.
 
 > **Note:** Because each AI tool evolves its own hook surface at its own pace, the matrix above reflects the events Rulesync currently translates. When a tool ships a new event that Rulesync does not yet support, the most reliable path is to open an issue — the matrix is the intended baseline to compare against.
 
@@ -186,7 +187,11 @@ Events present in the shared `hooks` block but unsupported by a given tool are s
 
 > **Note:** AugmentCode (Auggie CLI) hooks are merged under the top-level `hooks` key of the shared `.augment/settings.json` (project) / `~/.augment/settings.json` (global), mirroring Claude Code's per-event matcher arrays (`{ "EventName": [ { "matcher": "...", "hooks": [ { "type": "command", "command": "...", "timeout": ... } ] } ] }`). The `hooks` block is merged in place so it coexists with the `toolPermissions` block from the permissions feature. Five lifecycle events are supported — `preToolUse` ⇄ `PreToolUse`, `postToolUse` ⇄ `PostToolUse`, `sessionStart` ⇄ `SessionStart`, `sessionEnd` ⇄ `SessionEnd`, and `stop` ⇄ `Stop`. The `matcher` field (a case-sensitive regex, default `.*`, with `mcp:*` support) applies only to the tool events `PreToolUse`/`PostToolUse`; any matcher on the session events is dropped with a logged warning. Commands are emitted verbatim — Auggie exposes `AUGMENT_PROJECT_DIR` as a runtime environment variable, not as an inline command substitution, so no directory prefix is added. Only `command`-type hooks are supported.
 
+> **Note:** Vibe Code (mistral-vibe) hooks are **experimental** and written to a dedicated `.vibe/hooks.toml` (project) / `~/.vibe/hooks.toml` (global) as a flat `[[hooks]]` TOML array. Each entry carries its own event `type`, a `command`, and optional `name`, `timeout` (seconds, default 60), and `description`. Tool-hook entries (`before_tool` / `after_tool`) additionally carry a tool-name `match` (an fnmatch glob like `bash`/`mcp_*` or a `re:`-prefixed regex, case-insensitive — the canonical `matcher` field; `*` means "any tool") and an optional `strict` flag; `post_agent_turn` carries neither. Three events are supported — `preToolUse` ⇄ `before_tool`, `postToolUse` ⇄ `after_tool`, and `stop` ⇄ `post_agent_turn` (fires after every assistant turn that ends without pending tool calls). Only `command`-type hooks are emitted. Hooks require `enable_experimental_hooks = true` in `.vibe/config.toml`; Rulesync merges this flag into the existing config file (preserving MCP/permissions keys) as an auxiliary file and never deletes `.vibe/config.toml`.
+
 > **Note:** Goose hooks follow the Open Plugins spec: Rulesync writes a plugin directory `hooks/hooks.json` that Goose auto-discovers at startup. Locations are `<project>/.agents/plugins/rulesync/hooks/hooks.json` (project) and `~/.agents/plugins/rulesync/hooks/hooks.json` (global). The JSON shape matches Claude Code's (`{ "hooks": { "EventName": [ { "matcher": "...", "hooks": [ { "type": "command", "command": "..." } ] } ] } }`). Thirteen lifecycle events are supported — `sessionStart` ⇄ `SessionStart`, `sessionEnd` ⇄ `SessionEnd`, `stop` ⇄ `Stop`, `beforeSubmitPrompt` ⇄ `UserPromptSubmit`, `preToolUse` ⇄ `PreToolUse`, `postToolUse` ⇄ `PostToolUse`, `postToolUseFailure` ⇄ `PostToolUseFailure`, `beforeReadFile` ⇄ `BeforeReadFile`, `afterFileEdit` ⇄ `AfterFileEdit`, `beforeShellExecution` ⇄ `BeforeShellExecution`, `afterShellExecution` ⇄ `AfterShellExecution`, `subagentStart` ⇄ `SubagentStart`, and `subagentStop` ⇄ `SubagentStop`. The `matcher` regex is preserved, commands are emitted verbatim (Goose exposes `PLUGIN_ROOT` as a runtime environment variable), and only `command`-type hooks are supported.
+
+> **Note:** Qwen Code hooks are written under the top-level `hooks` key of `.qwen/settings.json` (project) / `~/.qwen/settings.json` (global), using Claude-style PascalCase per-matcher arrays (`{ "EventName": [ { "matcher": "...", "hooks": [ { "type": "command", "command": "...", "timeout": ... } ] } ] }`). Qwen's supported event set **differs from Gemini CLI's**, so rulesync defines a Qwen-specific mapping. Thirteen lifecycle events are supported — `sessionStart` ⇄ `SessionStart`, `sessionEnd` ⇄ `SessionEnd`, `preToolUse` ⇄ `PreToolUse`, `postToolUse` ⇄ `PostToolUse`, `postToolUseFailure` ⇄ `PostToolUseFailure`, `beforeSubmitPrompt` ⇄ `UserPromptSubmit`, `stop` ⇄ `Stop`, `subagentStart` ⇄ `SubagentStart`, `subagentStop` ⇄ `SubagentStop`, `preCompact` ⇄ `PreCompact`, `postCompact` ⇄ `PostCompact`, `permissionRequest` ⇄ `PermissionRequest`, and `notification` ⇄ `Notification`. Qwen-only events (`StopFailure`, `TodoCreated`, `TodoCompleted`) have no canonical equivalent. Commands are emitted verbatim (no `$GEMINI_PROJECT_DIR` rewriting), only `command`-type hooks are supported, and other top-level keys in `settings.json` are preserved on round-trip. See the [Qwen Code hooks docs](https://github.com/QwenLM/qwen-code/blob/main/docs/users/features/hooks.md).
 
 ## `.copilot/mcp-config.json`
 
@@ -256,6 +261,8 @@ Execute the following in parallel:
 
 The command body itself uses a Claude Code-compatible **universal syntax** (e.g. `$ARGUMENTS`, `` !`cmd` ``). When a target tool expects a different placeholder syntax, rulesync translates it automatically on generation and reverses the translation on import. See [Command Syntax](./command-syntax.md) for the full mapping.
 
+> **Qwen Code note:** Custom commands are emitted as **Markdown** files (not TOML — TOML is deprecated upstream) under `.qwen/commands/` (project) and `~/.qwen/commands/` (global, via `--global`). The file is an optional YAML frontmatter block (`description`) followed by the prompt body. Subdirectory namespacing is supported: `.qwen/commands/git/commit.md` becomes the `/git:commit` command. Any extra fields are preserved on round-trip under the `qwencode:` block.
+
 ## `rulesync/subagents/*.md`
 
 Example:
@@ -269,7 +276,20 @@ description: >- # subagent description
   suggest a specification, implement a new feature, refactor the codebase, or
   fix a bug. This agent can be called by the user explicitly only.
 claudecode: # for claudecode-specific parameters
-  model: inherit # opus, sonnet, haiku or inherit
+  model: inherit # opus, sonnet, haiku, fable, a full model id, or inherit (default)
+  tools: ["Read", "Write"] # (optional) allowed tools (string or list)
+  disallowedTools: ["Bash"] # (optional) tools to remove (string or list)
+  permissionMode: default # (optional) default | acceptEdits | bypassPermissions | plan
+  maxTurns: 20 # (optional) maximum agentic turns
+  skills: ["skill-creator"] # (optional) Agent Skills to utilize (string or list)
+  color: cyan # (optional) UI color (e.g. red, blue, green, cyan, ...)
+  memory: project # (optional) user | project | local
+  effort: high # (optional) low | medium | high | xhigh | max
+  isolation: worktree # (optional) run the subagent in an isolated git worktree
+  background: false # (optional) run the subagent in the background
+  initialPrompt: "Start by reading the spec." # (optional) seed prompt for the subagent
+  mcpServers: {} # (optional) MCP server config (passed through verbatim)
+  hooks: {} # (optional) hook config (passed through verbatim)
 copilot: # for GitHub Copilot specific parameters
   tools:
     - web/fetch # agent/runSubagent is always included automatically
@@ -286,6 +306,10 @@ opencode: # for OpenCode-specific parameters
       "git diff": allow
 kilo: # for Kilo-specific parameters
   mode: all # (optional, defaults to "all") use "subagent" for hidden/subagent-only agents
+cursor: # for Cursor-specific parameters (generated to .cursor/agents/*.md)
+  model: inherit # (optional, defaults to "inherit") model id, or "inherit" to use the parent's model
+  readonly: false # (optional, defaults to false) restrict the subagent to read-only tools
+  is_background: false # (optional, defaults to false) run the subagent as a background agent
 junie: # for JetBrains Junie CLI specific parameters (generated to .junie/agents/*.md; also imported from .agents/*.md)
   tools: ["Read", "Grep", "Edit"] # allowed tools
   disallowedTools: ["Bash", "WebSearch"] # disallowed tools
@@ -297,6 +321,14 @@ junie: # for JetBrains Junie CLI specific parameters (generated to .junie/agents
   allowPromptArgument: true # whether the subagent accepts a prompt argument
 takt: # takt specific parameters (optional; emitted under .takt/facets/personas/)
   name: "renamed-stem" # (optional) override the emitted filename stem (no path separators or "..")
+roo: # for Roo Code specific parameters (optional; aggregated into the root .roomodes file)
+  slug: planner # (optional) custom mode slug (^[a-zA-Z0-9-]+$); defaults to the sanitized file name
+  whenToUse: "When planning a task" # (optional) guidance for automated mode selection
+  customInstructions: "Be concise." # (optional) extra behavioral guidelines
+  roleDefinition: "You are the planner." # (optional) overrides the body as the mode's roleDefinition
+  groups: # (optional, defaults to ["read", "edit", "command", "mcp"]) tool access
+    - read
+    - ["edit", { fileRegex: "\\.md$", description: "Markdown files" }]
 ---
 
 You are the planner for any tasks.
@@ -308,7 +340,13 @@ Attention, again, you are just the planner, so though you can read any files and
 
 > **Gemini CLI note (as of 2026-04-01):** Subagents are generated to `.gemini/agents/`. To enable the agents feature, set `"experimental": { "enableAgents": true }` in your `.gemini/settings.json`.
 
+> **Qwen Code note:** Subagents are emitted as Markdown + YAML frontmatter under `.qwen/agents/` (project) and `~/.qwen/agents/` (user/global, via `--global`); the body is the subagent's system prompt. Besides the shared `name`/`description`, the `qwencode:` block accepts these optional fields (all preserved on round-trip): `model`, `approvalMode` (`default` | `plan` | `auto-edit` | `yolo` | `bubble`), `tools` (allowlist), `disallowedTools` (denylist), `maxTurns`, `color`, `mcpServers` (per-agent MCP overrides), and `hooks` (per-agent hook registrations). See the [Qwen Code sub-agents docs](https://github.com/QwenLM/qwen-code/blob/main/docs/users/features/sub-agents.md).
+
 > **Cline note:** Cline file-based agents are emitted as YAML files (`<name>.yaml`) into `.cline/agents/` (project) and `~/.cline/agents/` (global, via `--global`). The file is a YAML frontmatter block (`name` required, `description`) followed by the system prompt body, matching Cline's agent config loader.
+
+> **Devin note:** Devin Local custom subagent profiles are emitted as `AGENT.md` files in a **directory-per-agent** layout: `.devin/agents/<name>/AGENT.md` (project) and `~/.config/devin/agents/<name>/AGENT.md` (global, via `--global`). The directory name `<name>` is the profile id (derived from the rulesync subagent file name). The `AGENT.md` is a YAML frontmatter block followed by the subagent's system prompt. Besides the shared `name`/`description`, the `devin` subagent block accepts these optional fields (all preserved on round-trip): `model` (string, override the subagent LLM), `allowed-tools` (list of strings, restrict available tools), `permissions` (object with `allow`/`deny`/`ask` string lists, override tool permissions), and `max-nesting` (integer, enable nested subagent spawning up to the given depth). See the [Devin subagents docs](https://docs.devin.ai/cli/subagents).
+
+> **Roo note (as of 2026-06-16):** Roo Code reads project custom modes from a single aggregated `.roomodes` file at the workspace root (YAML; JSON also accepted). Rulesync therefore collapses every Roo-targeted subagent into that file's `customModes` array — each subagent becomes one mode whose `slug` is derived from the file name (sanitized to `^[a-zA-Z0-9-]+$`), `name`/`description` come from the shared frontmatter, and `roleDefinition` is the subagent body. The optional `roo:` block supplies `groups` (defaults to `["read", "edit", "command", "mcp"]`), `whenToUse`, `customInstructions`, an explicit `slug`, and a `roleDefinition` override. (Roo's previous `.roo/subagents/` output was inert — Roo Code never read it.) See the [Roo custom-modes docs](https://roocodeinc.github.io/Roo-Code/features/custom-modes).
 
 > **Kilo note (as of 2026-05-13):** Kilo's documented default for user-defined agents is `mode: all`, which makes the agent available both as a top-level pick and as a subagent. Set `kilo.mode: subagent` to opt into hidden/subagent-only behavior.
 
@@ -437,6 +475,12 @@ cursor: # for Cursor-specific parameters (optional)
 takt: # takt specific parameters (optional; emitted under .takt/facets/knowledge/ — frontmatter is dropped on emit)
   name: "renamed-stem" # (optional) override the emitted filename stem (no path separators or "..")
   extends: "base" # (optional) emit a leading `{extends:<parent>}` facet-inheritance directive (Takt 0.39.0+)
+qwencode: # for Qwen Code-specific parameters (optional; project .qwen/skills/, global ~/.qwen/skills/)
+  priority: 10 # (optional) higher values appear earlier in /skills listings
+  paths: # (optional) glob patterns (string or list) gating model discovery to matching files
+    - "src/**/*.ts"
+  user-invocable: false # (optional) hide from slash-command invocation, keep model access
+  disable-model-invocation: true # (optional) hide from the model but allow direct user invocation
 ---
 
 This is the skill body content.
@@ -534,6 +578,8 @@ You can control which individual tools from an MCP server are enabled or disable
 - `enabledTools`: An array of tool names that should be explicitly enabled for this server.
 - `disabledTools`: An array of tool names that should be explicitly disabled for this server.
 
+> **Qwen Code note:** MCP servers are written to the `mcpServers` key of `.qwen/settings.json` (project) / `~/.qwen/settings.json` (global, via `--global`). Qwen supports stdio (`command`/`args`), SSE (`url`), and HTTP (`httpUrl`) transports. Rulesync maps the canonical per-server `enabledTools` ⇄ Qwen's `includeTools` (allowlist) and `disabledTools` ⇄ Qwen's `excludeTools` (denylist). Other top-level keys in `settings.json` are preserved on round-trip.
+
 ### Codex-specific: pass shell env vars to MCP servers (`envVars`)
 
 Codex CLI supports a per-server array of shell env var names to inherit when launching the MCP server process. The source schema uses `envVars` (camelCase, matching the project convention used by sibling fields like `enabledTools`/`disabledTools`); the codex generator renames it to `env_vars` (snake_case) for codex's native `config.toml` format.
@@ -570,6 +616,8 @@ env_vars = ["OPENAI_API_KEY", "OPENROUTER_API_KEY", "GEMINI_API_KEY"]
 - Emitted only into the codex CLI output. Stripped from `RulesyncMcp.getMcpServers()` so it does not appear in other tools' generated configs (Claude Code, Kilo, OpenCode, Gemini CLI, Cursor, Cline, Junie, Factorydroid, Rovodev, etc.).
 - Use this for secrets and API keys you do not want literal-encoded into a committed `mcp.json`.
 - Precedence: codex CLI resolves these names from the user's runtime shell environment. If a name is also set in `env` (literal value), the codex CLI behavior is upstream-defined; see the [Codex configuration reference](https://developers.openai.com/codex/config-reference#mcp_serversid-env_vars) (last checked 2026-05-13) for the exact resolution rule.
+
+> **Grok CLI note:** MCP servers are written to a `[mcp_servers.<name>]` table in `.grok/config.toml` (project) / `~/.grok/config.toml` (global, via `--global`). The file is treated as shared Grok config: Rulesync only replaces the `mcp_servers` key and preserves every other table on round-trip, and it is never deleted. Unlike Codex CLI, Grok uses a literal `env` table (it does not support the `env_vars` runtime-passthrough list) and has no per-server tool allow/deny lists, so the only field rename is `disabled` (rulesync) ⇄ `enabled = false` (grok); an active server simply omits `enabled`. Servers with no environment variables are emitted without a dangling `[mcp_servers.<name>.env]` table (empty nested tables are stripped), and a server whose entire configuration would be empty is dropped with a warning.
 
 ### Goose-specific: MCP servers as `extensions` (global only)
 
@@ -744,5 +792,7 @@ For Qwen Code, this generates `permissions.allow`, `permissions.ask`, and `permi
 For Warp, this generates the `agent_mode_command_execution_allowlist` / `agent_mode_command_execution_denylist` regex arrays under the `[agents.profiles]` table of Warp's global user `settings.toml` (**global mode only** — Warp has no project-scoped permissions file). The settings file path differs per platform: macOS `~/.warp/settings.toml`, Linux `~/.config/warp-terminal/settings.toml`, Windows `%LOCALAPPDATA%\warp\Warp\config\settings.toml`. Only the `bash` category maps (`allow` → allowlist, `deny` → denylist); Warp matches commands with **regular expressions**, so patterns are emitted verbatim — author canonical `bash` patterns as regexes when targeting Warp (mirrors Zed). Warp has no per-command `ask` list, so `ask` rules are dropped, and non-`bash` categories are skipped (with a warning when they carry `deny` rules). On import, a pattern present in both lists resolves to `deny` (Warp's denylist wins). The `[agents.profiles]` block is merged into the existing `settings.toml`, preserving other Warp settings, and the file is never deleted. **rulesync owns the two command lists** (it is the source of truth): the `allowlist`/`denylist` are replaced from the rulesync config on each `--global` generate, so a manually curated Warp allowlist/denylist not mirrored in `.rulesync/permissions.json` is overwritten — keep command permissions in rulesync. MCP allow/deny and file-read permissions are separate Warp surfaces not modeled here. See the [Warp agent profiles & permissions docs](https://docs.warp.dev/agent-platform/capabilities/agent-profiles-permissions/).
 
 For the Antigravity IDE, this generates `permissions.allow`, `permissions.ask`, and `permissions.deny` arrays in the committable workspace `.antigravity/settings.json` (**project mode only**). Antigravity 2.0 evaluates these `Deny > Ask > Allow` and uses `action(target)` entries; rulesync maps canonical categories onto the IDE action vocabulary: `read` → `read_file`, `edit`/`write` → `write_file`, `bash` → `command`, `webfetch`/`websearch` → `read_url`, `mcp` → `mcp` (the IDE-only `execute_url` / `unsandboxed` actions have no canonical equivalent and pass through verbatim). Because `edit`/`write` collapse to `write_file` and `webfetch`/`websearch` collapse to `read_url`, importing normalizes back to `write` / `webfetch` (a documented, lossy mapping). The `settings.json` file holds other workspace settings, so the `permissions` block is merged in place — entries for unmanaged actions are preserved — and the file is never deleted. The User-scope settings file is a platform-dependent VS-Code-style path outside rulesync's home-relative global model, so **global mode is not supported**; the workspace file is intended to be checked into git. See the [Antigravity permissions docs](https://antigravity.google/docs/permissions).
+
+For Rovo Dev CLI, this generates the `toolPermissions` block of the global `~/.rovodev/config.yml` (**global mode only** — Rovo Dev has no project-scoped permissions file, mirroring the Rovodev MCP adapter). Rovo Dev's three levels (`allow`/`ask`/`deny`) are an exact 1:1 with rulesync's canonical actions, so action values pass through verbatim. The `bash` category maps the catch-all `*` pattern to `bash.default` and every other pattern to a `bash.commands[]` entry `{ command: <pattern as regex>, permission }` (Rovo Dev matches commands as regexes, so author `bash` patterns accordingly). The `read` category maps to the inspection tools (`open_files`, `expand_code_chunks`, `expand_folder`, `grep`) and `edit`/`write` to the mutation tools (`find_and_replace_code`, `create_file`, `delete_file`, `move_file`); because these per-tool keys hold a single level (no per-pattern rules), only the catch-all `*` of each category sets the level. Because `edit` and `write` both map onto the same mutation tools, a conflicting catch-all between them cannot be represented; `edit` takes precedence and a warning is logged. Non-catch-all `allow` paths in those categories are surfaced as `allowedExternalPaths` so explicit grants are not dropped; non-`allow` non-catch-all rules cannot be expressed per-path and are skipped with a warning. Categories without a clean Rovo Dev target (e.g. `webfetch`) are skipped with a warning. `config.yml` holds all of Rovo Dev's settings (`agent`, `sessions`, `mcp`, etc.), so the `toolPermissions` block is merged in place — every other top-level key (and any unmanaged keys inside `toolPermissions`) is preserved (values only — YAML comments and formatting in the existing file are not retained on rewrite) — and the file is never deleted. See the [Rovo Dev CLI settings](https://support.atlassian.com/rovo/docs/manage-rovo-dev-cli-settings/) and [tool permissions](https://support.atlassian.com/rovo/docs/use-tools-in-rovo-dev-cli/) docs.
 
 > **Note: Interaction with ignore feature.** Both the ignore feature and the permissions feature can manage `Read` tool deny entries in `.claude/settings.json`. When both features configure the `Read` tool, the **permissions feature takes precedence** and a warning is emitted. If you only need to restrict file reads based on glob patterns, use the ignore feature (`.rulesync/.aiignore`). Use permissions only when you need fine-grained `allow`/`ask`/`deny` control over the `Read` tool.
