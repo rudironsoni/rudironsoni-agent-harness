@@ -1,0 +1,5 @@
+# lychee link checker config
+# Mirrors .gitignore posture: scratch dirs are invisible to both git and lychee.
+# Values are regex; "(^|/)tmp/" matches a tmp/ directory at any depth.
+
+exclude_path = ["(^|/)tmp/"]

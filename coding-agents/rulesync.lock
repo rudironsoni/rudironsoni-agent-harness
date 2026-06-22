@@ -1,0 +1,111 @@
+{
+  "lockfileVersion": 1,
+  "sources": {
+    "dyoshikawa/rulesync": {
+      "requestedRef": "main",
+      "resolvedRef": "f5d9aaaabed04883f9d9e1081fc609debf0adfe8",
+      "resolvedAt": "2026-06-22T09:16:27.109Z",
+      "skills": {
+        "rulesync": {
+          "integrity": "sha256-ab0b2b058ec14c4e306e01beccae0e9fda53d9f8a2b1ce33f0efc594d84157a8"
+        }
+      }
+    },
+    "kepano/obsidian-skills": {
+      "requestedRef": "main",
+      "resolvedRef": "a1dc48e68138490d522c04cbf5822214c6eb1202",
+      "resolvedAt": "2026-06-22T09:16:32.171Z",
+      "skills": {
+        "defuddle": {
+          "integrity": "sha256-538dd8aaa673910e8b75a13a8a401b63b28a5a1c392374052191fd72b6e7017a"
+        },
+        "json-canvas": {
+          "integrity": "sha256-b530b7d3363caf52d71a633b10965759004be6dac898b909d07e8202861e4506"
+        },
+        "obsidian-bases": {
+          "integrity": "sha256-83e988a6a4eec9a06c8668199b8f1a4189324346cbc50a73ef1948f80d85a60d"
+        },
+        "obsidian-cli": {
+          "integrity": "sha256-58fec9d58ebc0c4ddbbdecf49a43fbdb2748b81729382708f84269fa84104564"
+        },
+        "obsidian-markdown": {
+          "integrity": "sha256-eeaf2e16446fe6aa0c6e2e50dc84d6301de1647c44e43b37e018f8814bf8f3ae"
+        }
+      }
+    },
+    "cocoindex-io/cocoindex-code": {
+      "requestedRef": "main",
+      "resolvedRef": "a18a0ee0f6417593b66643e123a411db96ae7d57",
+      "resolvedAt": "2026-06-22T09:16:34.412Z",
+      "skills": {
+        "ccc": {
+          "integrity": "sha256-e16e05ce4e22a925dff59cb1bb1e2b152f39a367f448536ab283f10c8a31acdf"
+        }
+      }
+    },
+    "blader/humanizer": {
+      "requestedRef": "main",
+      "resolvedRef": "9600f2b7241cb4eed6ad803abee5ea01d67fe8e4",
+      "resolvedAt": "2026-06-22T09:16:36.399Z",
+      "skills": {
+        "humanizer": {
+          "integrity": "sha256-8f5b3cf97bbbae0b5f12809395baea746d371d56d06f2cc8bdf9283d6d8fb88d"
+        }
+      }
+    },
+    "mattpocock/skills:skills/productivity": {
+      "requestedRef": "main",
+      "resolvedRef": "6eeb81b5fcfeeb5bd531dd47ab2f9f2bbea27461",
+      "resolvedAt": "2026-06-22T09:16:39.297Z",
+      "skills": {
+        "handoff": {
+          "integrity": "sha256-9d467ac388762c34b7fbb1683ba54af1f8918c28e1a1a98bc0f1ca840f94a9cf"
+        },
+        "teach": {
+          "integrity": "sha256-63feafa166e24e8b85376accae0af357beb1874c61776acc32c1d39a6fce9bc4"
+        }
+      }
+    },
+    "mattpocock/skills:skills/personal": {
+      "requestedRef": "main",
+      "resolvedRef": "6eeb81b5fcfeeb5bd531dd47ab2f9f2bbea27461",
+      "resolvedAt": "2026-06-22T09:16:41.022Z",
+      "skills": {
+        "edit-article": {
+          "integrity": "sha256-be02c5ae0b89ca09c4cc4abc5f82e9bb0b739a73ec6ed4c45e01353e3be39274"
+        },
+        "obsidian-vault": {
+          "integrity": "sha256-1e34caaa182c3e70be80aad679952bd0850e76c257a3f24bd7118bebfbec6c72"
+        }
+      }
+    },
+    "mattpocock/skills:skills/engineering": {
+      "requestedRef": "main",
+      "resolvedRef": "6eeb81b5fcfeeb5bd531dd47ab2f9f2bbea27461",
+      "resolvedAt": "2026-06-22T09:16:47.478Z",
+      "skills": {
+        "grill-with-docs": {
+          "integrity": "sha256-8683d99a2d347d358662c4d4744affd38212913b85a69158118b1f6735e5da7e"
+        },
+        "improve-codebase-architecture": {
+          "integrity": "sha256-2823acbf7eb6674817713d21f449418c03dc4dbe33661760cff64255d40f8532"
+        },
+        "prototype": {
+          "integrity": "sha256-ba8b437ef2c355f5321cde0b21011190a6e21f7554fc4139d0df3f61fae6e5cb"
+        },
+        "tdd": {
+          "integrity": "sha256-20c73dd83caf7c5fb38e56a9a12558dc0e4791282369027c74aeb43d12df7ecf"
+        },
+        "to-issues": {
+          "integrity": "sha256-6140d82b09999229e8ac00f537caee00e6e74bff7b2d717d34a483f2554d0917"
+        },
+        "to-prd": {
+          "integrity": "sha256-3bcff1d61bd7999b66f118909822a8e6a0e3f6d583c1f00c2ec0a4a2a49d1b88"
+        },
+        "triage": {
+          "integrity": "sha256-ac70de32fe89f8f08941e0baa3659954cb38d2a0de41a4050ded1456b81f5699"
+        }
+      }
+    }
+  }
+}

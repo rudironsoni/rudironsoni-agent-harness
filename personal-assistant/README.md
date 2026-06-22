@@ -1,0 +1,207 @@
+# Personal Assistant — a Claude Code / Cursor template
+
+A starter project for running a long-running personal assistant on top of [Claude Code](https://claude.com/code) or [Cursor](https://cursor.com) — the templates, skills, and memory layout are agent-agnostic, so use whichever you prefer. Ships with:
+
+- **Task list** (`TASKS.md`) — Eisenhower-classified active / waiting-on / someday / done
+- **Memory wiki** (`memory/`) — interlinked knowledge base maintained by the assistant
+- **Skills** for daily briefings, wiki ingest/query, Google Workspace access, and memory maintenance
+- **Slash commands** for setup, weekly cleanup, wiki ingest, and session compaction
+
+Clone, launch your agent of choice, run the setup flow, you're done.
+
+---
+
+## Demos
+
+Two short walkthroughs covering the core use cases — ingesting a meeting transcript into the memory wiki, building a daily briefing from GitHub and Google Calendar, and creating tasks that pull context from existing memories.
+
+|  |  |
+|:---:|:---:|
+| [![Demo 1](https://img.youtube.com/vi/hw3QfQ75yc0/hqdefault.jpg)](https://www.youtube.com/watch?v=hw3QfQ75yc0) | [![Demo 2](https://img.youtube.com/vi/h1O2-p98OXQ/hqdefault.jpg)](https://www.youtube.com/watch?v=h1O2-p98OXQ) |
+
+---
+
+## Prerequisites
+
+- [Claude Code](https://claude.com/code) (`claude` on PATH) **or** [Cursor](https://cursor.com) — either one drives the setup flow.
+- [`gh`](https://cli.github.com) (for cloning + the `daily-briefing` PR-search step)
+- [`gws`](https://googleworkspace-cli.mintlify.app) (only if you enable Google Workspace integration — `/setup` walks you through the OAuth step; you'll also need Node.js + the [`gcloud` SDK](https://cloud.google.com/sdk/docs/install))
+- [`lychee`](https://github.com/lycheeverse/lychee) (optional — powers `make check-links`, which validates the markdown links across the repo; `brew install lychee` or `cargo install lychee`)
+- macOS or Linux. Tested on macOS.
+
+---
+
+## Quick start
+
+Clone the template:
+
+```sh
+git clone https://github.com/<you>/<your-fork>.git ~/Workspace/my-assistant
+cd ~/Workspace/my-assistant
+```
+
+Then pick your agent:
+
+### With Claude Code
+
+```sh
+claude
+```
+
+In the Claude session:
+
+```
+/setup
+```
+
+### With Cursor
+
+Open the project in Cursor and start an agent chat. Then send:
+
+```
+/setup
+```
+
+Cursor will read the runbook and walk you through the exact same interview. (The `.claude/commands/` files are just natural-language instructions — nothing in them is Claude-Code-only.)
+
+---
+
+`/setup` (or the Cursor equivalent above) is agent-driven: it interviews you, runs deterministic scripts under [.claude/scripts/setup/](.claude/scripts/setup/) for the mechanical work, and pauses for you to complete interactive steps (OAuth) outside the chat. What it asks for:
+
+| Prompt | Used for |
+|---|---|
+| Your name | `{{NAME}}` in CLAUDE.md, skills, commands |
+| Your email | `{{EMAIL}}` in CLAUDE.md |
+| GitHub username (optional) | PR search in `daily-briefing` |
+| Google Workspace (optional) | Creates an isolated `~/.config/gws-<nick>/` and walks you through `gws auth setup` against the Google account this assistant should use |
+| GitHub account pin (optional, only if 2+ `gh` accounts) | Bakes `gh auth token --user <chosen>` into the makefile so `daily-briefing` uses the right account |
+| Wipe template git history (optional) | Fresh `git init` so your assistant's history starts clean |
+
+At the end `/setup` generates a `makefile` with the right per-assistant env vars. Launch with `make run`.
+
+`/setup` is idempotent — re-run it anytime and it'll detect completed steps and offer to skip or redo each one individually.
+
+---
+
+## Personalize
+
+After setup:
+
+1. Open `CLAUDE.md` and edit the **Preferences** block to match how you want the assistant to behave.
+2. Drop reference docs (meeting notes, articles, transcripts) into `sources/`. Run `/wiki-ingest` and the assistant will turn them into wiki pages under `memory/`.
+3. Add tasks to `TASKS.md` directly, or just tell the assistant in chat ("add a task to call the dentist").
+4. Ask "what's my plan today?" to test the `daily-briefing` skill end-to-end.
+
+---
+
+## Google Workspace authentication
+
+The `daily-briefing`, `wiki-ingest`, and `google-workspace-cli` skills all talk to Google APIs through [`gws`](https://googleworkspace-cli.mintlify.app). `/setup` walks you through the OAuth dance, but two things commonly trip people up — especially if you're mixing a **personal Google account** (where it's easy to spin up a GCP project) with a **company Google account** (where the data you actually want lives).
+
+### Isolated config dir
+
+Every assistant gets its own gws config under `~/.config/gws-<nick>/`. That dir holds three things:
+
+- `client_secret.json` — the OAuth client downloaded from a GCP project
+- `credentials.enc` — your encrypted refresh token
+- `token_cache.json` — short-lived access token, auto-refreshed
+
+The makefile generated by `/setup` exports `GOOGLE_WORKSPACE_CLI_CONFIG_DIR=$HOME/.config/gws-<nick>` automatically, so anything launched via `make run` (or invoked by the agent) finds the right config.
+
+**For the env var to be available in your own shell** (so a bare `gws ...` command works), add this to `~/.zshrc` (or `~/.bashrc`):
+
+```sh
+export GOOGLE_WORKSPACE_CLI_CONFIG_DIR="$HOME/.config/gws-<nick>"
+```
+
+Without that, `gws auth login` in a fresh terminal fails with `No OAuth client configured` — it's looking in `~/.config/gws/` (the default), not your isolated dir.
+
+### Picking which account owns the GCP project
+
+The OAuth client lives in a GCP project. The signed-in account is whoever you pick in the OAuth browser flow. They don't have to be the same — but if they aren't, you need to deal with cross-account IAM. Three patterns, easiest first:
+
+**1. Single account (personal-only or company-only).** GCP project, OAuth client, and OAuth sign-in are all the same Google account. Simplest. `/setup` handles everything.
+
+**2. GCP project in personal account, OAuth sign-in with company account.** Common pattern when your company's Workspace admin restricts GCP project creation but allows third-party OAuth apps. After running `gws auth login` and signing in with the company account, the first API call will fail with:
+
+```
+Caller does not have required permission to use project <gcp-project>.
+Grant the caller the roles/serviceusage.serviceUsageConsumer role…
+```
+
+Fix:
+
+1. In your browser, switch to the **personal** Google account that owns the GCP project.
+2. Open `https://console.developers.google.com/iam-admin/iam?project=<your-gcp-project>`.
+3. **Grant Access** → add your company email → role **Service Usage Consumer** (`roles/serviceusage.serviceUsageConsumer`) → Save.
+4. Wait ~1 min for propagation, then retry: `gws calendar calendarList list`.
+
+You may also need to add your company email as a **Test user** on the OAuth consent screen if the GCP project's OAuth app is still in "Testing" mode (Google Cloud Console → APIs & Services → OAuth consent screen → Test users).
+
+**3. GCP project in company account.** Cleanest long-term, but often blocked by Workspace admin policy (third-party app restrictions, or no permission to create GCP projects). If it's an option, run `/setup` while signed into the company account everywhere; otherwise fall back to pattern 2.
+
+### Switching the signed-in account
+
+If you authenticated with the wrong account (or want to swap), the recovery is:
+
+```sh
+gws auth login            # opens browser; pick the correct account this time
+rm ~/.config/gws-<nick>/token_cache.json   # only if API calls still return the old account
+```
+
+Confirm with:
+
+```sh
+gws auth status                        # shows the email gws thinks is authenticated
+gws calendar calendarList list         # the 'primary' calendar's id is the actual signed-in email
+```
+
+If those two disagree, the token cache is stale — delete `token_cache.json` and retry.
+
+---
+
+## What's in the box
+
+```
+.
+├── CLAUDE.md                    persistent assistant instructions (loaded every session)
+├── TASKS.md                     your task list
+├── memory/CLAUDE.md             wiki hub (catalog of memory/ pages)
+├── sources/                     drop raw docs here for /wiki-ingest
+├── makefile                     generated by /setup; runs the assistant via 'make run'
+└── .claude/
+    ├── settings.json            project-level Claude Code settings
+    ├── settings.local.json.example  copy → .local on first setup
+    ├── mcp.json                 MCP servers (project-scoped)
+    ├── commands/                slash commands (includes /setup, the bootstrap flow)
+    ├── skills/                  capability skills
+    └── scripts/
+        └── setup/               deterministic building blocks invoked by /setup
+```
+
+### Skills
+
+| Skill | Purpose | External deps |
+|---|---|---|
+| `daily-briefing` | Calendar + PRs + tasks → Eisenhower-classified plan | `gws`, `gh` |
+| `wiki` | Ingest / query / lint the memory wiki | none |
+| `task-management` | Loads relevant wiki pages when creating/editing tasks | none |
+| `claude-md-template` | Enforces the Root/Intermediate/Leaf spine on every `CLAUDE.md` | none |
+| `memory-claude-md-sync` | Keeps ancestor `CLAUDE.md` navigation in sync on `memory/` writes | none |
+| `google-workspace-cli` | Search/read/edit Drive, Docs, Sheets, Gmail, Calendar | `gws` |
+
+### Slash commands
+
+| Command | Purpose |
+|---|---|
+| `/setup` | One-time agent-driven bootstrap (identity, gws, makefile) |
+| `/wiki-ingest` | Process raw docs from `sources/` into wiki pages |
+| `/weekly-done-cleanup` | Archive stale completed tasks |
+| `/grill-me` | Interview relentlessly about a plan until shared understanding |
+| `/compact-session` | Capture chat context into session notes + resume prompt |
+
+---
+
+## License
+
+MIT — see [LICENSE](LICENSE).
