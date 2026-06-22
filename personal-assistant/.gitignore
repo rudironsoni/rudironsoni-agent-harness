@@ -1,0 +1,18 @@
+# Local Claude config (per-clone, may contain machine-specific paths)
+.claude/settings.local.json
+
+# makefile is generated per-assistant by /setup — template ships without it
+makefile
+
+# OS / editor cruft
+.DS_Store
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# Common secret files (defense in depth — secrets should live outside the repo, not here)
+.env
+.env.*
+*.pem
+*.key
