@@ -1,0 +1,97 @@
+# OS / editor noise
+.DS_Store
+*.swp
+*.swo
+.idea/
+
+# Local editor settings; keep generated MCP configs when present
+.vscode/*
+!.vscode/
+!.vscode/mcp.json
+**/.vscode/*
+!**/.vscode/
+!**/.vscode/mcp.json
+
+# Local agent/session metadata
+.serena/
+**/.serena/
+**/.claude/settings.local.json
+
+# Local runtime/config generated during assistant setup
+makefile
+**/makefile
+
+# Dependency and tool caches
+node_modules/
+**/node_modules/
+.cache/
+**/.cache/
+.pytest_cache/
+**/.pytest_cache/
+__pycache__/
+**/__pycache__/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+
+# Secrets and local environment files
+.env
+.env.*
+**/.env
+**/.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+
+# RuleSync generated target outputs.
+# Keep .rulesync packages as the source of truth. Generated agent files and
+# folders should be recreated with rulesync instead of committed.
+**/.agents/
+**/.amp/
+**/.antigravity/
+**/.augment/
+**/.claude/
+**/.cline/
+**/.codex/
+**/.copilot/
+**/.cursor/
+**/.deepagents/
+**/.devin/
+**/.factory/
+**/.gemini/
+**/.goosehints/
+**/.grok/
+**/.junie/
+**/.kilo/
+**/.kiro/
+**/.opencode/
+**/.pi/
+**/.qwen/
+**/.roo/
+**/.rovodev/
+**/.rules/
+**/.takt/
+**/.vibe/
+**/.vscode/
+**/.warp/
+**/.windsurf/
+**/.zed/
+**/.github/copilot-instructions.md
+**/.github/skills/
+**/.github/hooks/
+**/.mcp.json
+**/CLAUDE.md
+**/GEMINI.md
+**/QWEN.md
+**/kilo.jsonc
+**/opencode.jsonc
+**/replit.md
+**/.augmentignore
+**/.clineignore
+**/.cursorignore
+**/.devinignore
+**/.geminiignore
+**/.vibeignore

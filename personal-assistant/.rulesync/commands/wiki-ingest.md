@@ -5,18 +5,18 @@ description: >
   Process a single source into the memory/ wiki and TASKS.md. Accepts a generic
   input (file path, URL, pasted text, or an MCP reference), loads relevant
   context, proposes a scope of candidate points for {{NAME}} to select via
-  AskQuestion, then writes only the approved entries into the right pages.
+  the active agent question flow, then writes only the approved entries into the right pages.
 claudecode:
   name: wiki-ingest
 ---
 ## Goal
-Process a source into the [**memory**](../../memory/CLAUDE.md) layer and [**TASKS.md**](../../TASKS.md).
+Process a source into the [**memory**](../../memory/AGENTS.md) layer and [**TASKS.md**](../../TASKS.md).
 
 The input is **generic**: it can be a file path, a URL, raw text pasted directly into the chat, or a reference to content reachable via an MCP server (e.g. a meeting transcript, a chat thread, an issue tracker item, a shared doc). An input is **mandatory** — the command does nothing without one.
 
 ## Workflow
 
-Follow these steps strictly and in order. Use `TodoWrite` to track progress through each step.
+Follow these steps strictly and in order. Use the active agent progress tracker to track progress through each step.
 
 ### Step 1: Acquire the input
 
@@ -24,13 +24,13 @@ The input arrives as `$ARGUMENTS`. **If it is empty**, prompt {{NAME}} for a sou
 
 ### Step 2: Load context
 
-Starting from the root [`CLAUDE.md`](../../CLAUDE.md), follow the Deep-Dive Navigation table recursively into the sub-areas relevant to the source. Read the most likely affected pages so you avoid duplication and contradiction.
+Starting from the root [`AGENTS.md`](../../AGENTS.md), follow the Deep-Dive Navigation table recursively into the sub-areas relevant to the source. Read the most likely affected pages so you avoid duplication and contradiction.
 
 ### Step 3: Propose ingest scope and align with {{NAME}}
 
 Before touching any pages, surface what's worth ingesting and let {{NAME}} pick exactly what to keep. **This avoids spending tokens on details that don't deserve to be remembered, and avoids landing content in the wrong layer.**
 
-Present the candidate points directly through the `AskQuestion` tool as a single multi-select question (`allow_multiple: true`), so {{NAME}} just selects which entries to ingest. Order the options by significance (most significant first), and make each option label self-contained, with each part on its own line: a significance tag (**[strongly worth ingesting]**, **[worth a brief mention]**, or **[probably not worth ingesting]**) and short title, the destination file(s), and a one-line summary of the substance. For example:
+Present the candidate points directly through the `the active agent question flow` tool as a single multi-select question (`allow_multiple: true`), so {{NAME}} just selects which entries to ingest. Order the options by significance (most significant first), and make each option label self-contained, with each part on its own line: a significance tag (**[strongly worth ingesting]**, **[worth a brief mention]**, or **[probably not worth ingesting]**) and short title, the destination file(s), and a one-line summary of the substance. For example:
 
 ```
 [strongly worth ingesting] Continuous-discovery cadence

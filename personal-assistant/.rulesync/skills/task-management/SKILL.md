@@ -30,13 +30,13 @@ Extract the **task description** from the user's message — the subject, keywor
 
 ## Step 2 — Rank memories
 
-Read `memory/CLAUDE.md`. For each page listed, score its relevance to the task query by comparing the page name, summary, and any entity names against the task description. Use keyword overlap, entity matching, and semantic proximity.
+Read `memory/AGENTS.md`. For each page listed, score its relevance to the task query by comparing the page name, summary, and any entity names against the task description. Use keyword overlap, entity matching, and semantic proximity.
 
 Select the **top-k most relevant pages** (k = min(5, total pages)). Always include every page that shares an explicit entity name (person, project) with the task.
 
 ## Step 3 — Ask the user
 
-Present the top-k pages using the `AskQuestion` tool with `allow_multiple: true`. Format:
+Present the top-k pages using the `the active agent question flow` tool with `allow_multiple: true`. Format:
 
 - **id**: `select-memories`
 - **prompt**: "I found these memories related to your task. Which ones should I load for context?"

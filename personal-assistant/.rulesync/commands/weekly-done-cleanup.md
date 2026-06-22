@@ -32,7 +32,7 @@ on what's actually relevant this week.
 
 ### Step 1: Load context
 
-Read CLAUDE.md to understand current projects, people, terms, and active initiatives.
+Read AGENTS.md to understand current projects, people, terms, and active initiatives.
 Read TASKS.md in full — all sections: Active, Waiting On, Someday, and Done.
 
 ### Step 2: Evaluate each Done task

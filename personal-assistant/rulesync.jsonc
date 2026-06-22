@@ -1,10 +1,13 @@
 {
   "$schema": "https://github.com/dyoshikawa/rulesync/releases/latest/download/config-schema.json",
   "targets": [
-    "copilot",
-    "cursor",
     "claudecode",
+    "cursor",
+    "copilotcli",
     "codexcli",
+    "antigravity-cli",
+    "factorydroid",
+    "pi",
     "opencode"
   ],
   "features": [

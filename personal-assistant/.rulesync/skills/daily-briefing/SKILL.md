@@ -10,7 +10,7 @@ targets:
 ---
 # Daily Briefing
 
-Produces {{NAME}}'s complete daily picture by gathering three data sources in parallel and presenting them in the plan format defined in `CLAUDE.md`.
+Produces {{NAME}}'s complete daily picture by gathering three data sources in parallel and presenting them in the plan format defined in `AGENTS.md`.
 
 ## When to trigger
 

@@ -17,8 +17,8 @@ A persistent, compounding knowledge base. The LLM writes and maintains the wiki;
 Three layers:
 
 - **Sources** (`sources/`) — raw, immutable input documents (transcripts, articles, PDFs). Never modified by the LLM.
-- **Wiki** (`memory/`) — flat directory of LLM-generated markdown pages. All pages are siblings. `memory/CLAUDE.md` is the navigation hub.
-- **Schema** (`CLAUDE.md` + this skill) — governs structure and operations.
+- **Wiki** (`memory/`) — flat directory of LLM-generated markdown pages. All pages are siblings. `memory/AGENTS.md` is the navigation hub.
+- **Schema** (`AGENTS.md` + this skill) — governs structure and operations.
 
 ## Operations
 
@@ -46,7 +46,7 @@ Process a raw source from `sources/` into wiki pages. Invoked via the `/project:
    ---
    ```
 4. Update existing project and concept pages with new information from the source. Add cross-references (`[link text](other-page.md)`) between related pages.
-5. Update `memory/CLAUDE.md`:
+5. Update `memory/AGENTS.md`:
    - Add new pages to the appropriate section (Projects, Concepts, Preferences)
    - Update one-line summaries if they've become stale
 6. Delete the source file from `sources/` — it has been fully processed.
@@ -55,7 +55,7 @@ Process a raw source from `sources/` into wiki pages. Invoked via the `/project:
 - Never modify files in `sources/`. They are immutable.
 - **Never create person pages.** People are documented inline on the project or concept pages where they are relevant (e.g., a collaborators table or section).
 - One page per entity (project, concept). If a page already exists, update it — don't create a duplicate.
-- Every new page must be added to `memory/CLAUDE.md`.
+- Every new page must be added to `memory/AGENTS.md`.
 - Delete each source file after processing — `sources/` should be empty when all ingestion is done.
 - Use relative links between wiki pages (they're all siblings in `memory/`).
 - Frontmatter `type` field is required on all pages: `project`, `concept`, `preference`, or `synthesis`.
@@ -66,7 +66,7 @@ Answer questions using the wiki as the primary knowledge source.
 
 **Steps:**
 
-1. Read `memory/CLAUDE.md` to identify relevant pages.
+1. Read `memory/AGENTS.md` to identify relevant pages.
 2. Read those pages.
 3. Synthesize an answer with citations to specific wiki pages.
 4. If the answer represents a valuable synthesis (comparison, analysis, connection), offer to file it as a new wiki page of type `synthesis`.
@@ -81,12 +81,12 @@ Health-check the wiki. Run periodically or on request.
 
 **Checks:**
 
-1. **Orphan pages** — files in `memory/` not listed in `memory/CLAUDE.md`.
+1. **Orphan pages** — files in `memory/` not listed in `memory/AGENTS.md`.
 2. **Broken links** — references to pages that don't exist.
 3. **Stale content** — pages not updated in 30+ days that reference active projects.
 4. **Missing cross-references** — pages that mention entities with their own page but don't link to them.
 5. **Contradictions** — claims in one page that conflict with another.
 6. **Missing pages** — entities mentioned across multiple pages that lack their own dedicated page.
-7. **Index drift** — one-line summaries in `memory/CLAUDE.md` that no longer match page content.
+7. **Index drift** — one-line summaries in `memory/AGENTS.md` that no longer match page content.
 
 **Output:** a report listing issues found and suggested fixes. Apply fixes only with confirmation.
