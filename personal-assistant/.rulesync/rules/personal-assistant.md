@@ -1,3 +1,10 @@
+---
+root: true
+targets:
+  - '*'
+globs:
+  - '**/*'
+---
 # Personal Assistant
 
 ## How to Use This File

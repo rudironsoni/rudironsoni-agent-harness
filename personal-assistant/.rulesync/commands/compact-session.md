@@ -19,7 +19,7 @@ This is a chat-end workflow. It produces three outputs:
 
 ## Workflow
 
-Follow these steps strictly and in order. Use `TodoWrite` to track progress.
+Follow these steps strictly and in order. Use the active agent progress tracker to track progress.
 
 ### Step 1: Identify the project and locate the session-notes file
 
