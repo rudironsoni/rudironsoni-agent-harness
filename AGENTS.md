@@ -51,6 +51,39 @@ rulesync install
 
 Only run `rulesync install --update` when the user explicitly wants dependency/source updates.
 
+### Install A Package Into Another Repository
+
+This repository contains multiple RuleSync packages, each aimed at a particular
+use case. Choose the package intentionally before installing it into another
+repository:
+
+- `coding-agents/`: shared coding-agent behavior. This package is currently configured as global.
+- `obsidian-plugin-development/`: Obsidian plugin development repositories.
+- `personal-assistant/`: personal assistant and second-brain repositories.
+
+To install a repo-local package into another repository, run RuleSync from the
+selected package in this harness and point `--output-roots` at the target repo:
+
+```bash
+HARNESS=/Users/rudimar.ronsoni@feverup.com/src/rudironsoni/rudironsoni-agent-harness
+PACKAGE=personal-assistant
+TARGET=/path/to/target-repo
+
+cd "$HARNESS/$PACKAGE"
+
+rulesync generate --check \
+  --input-root .rulesync \
+  --output-roots "$TARGET"
+
+rulesync generate \
+  --input-root .rulesync \
+  --output-roots "$TARGET"
+```
+
+The target repo does not need its own `rulesync.jsonc` for this flow. The config
+comes from the selected harness package. Packages with `"global": true`, such as
+`coding-agents/` today, should not be used for repo-local installs as-is.
+
 ## Generated Output Discipline
 
 Keep source and generated output changes together when they belong to the same logical change. Do not mix unrelated generated churn into a focused commit.
