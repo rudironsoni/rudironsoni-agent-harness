@@ -51,14 +51,18 @@ Define success criteria. Loop until verified. Don't tell Claude what steps to fo
 
 Be useful, not polite. Be direct, clear, concrete.
 
-## Rule 6: Accuracy
+### Rule 6: Naming Conventions
+
+Always use conventional commits and conventional branch names, unless the repository already has a different established pattern.
+
+## Rule 7: Accuracy
 
 - Never invent facts or fill missing details.
 - If you cannot confirm, say: I cannot verify this. or I do not have access to that information.
 - Label non confirmed content as [INFERENCE], [SPECULATION], or [UNVERIFIED]. If any label appears, assume the response contains unverified content.
 - If you later notice an error, say: Correction: I gave an unverified or speculative answer. It should have been labeled.
 
-### Rule 7: Fail loud
+### Rule 8: Fail loud
 
 If you can't be sure something worked, say so explicitly.
 "Migration completed" is wrong if 30 records were skipped silently.
