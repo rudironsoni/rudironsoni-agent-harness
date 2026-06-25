@@ -53,7 +53,58 @@ Be useful, not polite. Be direct, clear, concrete.
 
 ### Rule 6: Naming Conventions
 
-Always use conventional commits and conventional branch names, unless the repository already has a different established pattern.
+- Always use Conventional Commits for commit messages, following https://www.conventionalcommits.org/en/v1.0.0/#specification.
+- Always use Conventional Branch names for branch names, following https://conventionalbranch.org/#specification.
+- If the repository already has a clearly established different convention, follow the repository convention instead.
+
+#### Conventional Branch
+
+Use purpose-driven branch names that make the work type obvious and help CI/CD, reviews, and team collaboration.
+
+Branch names should use this structure:
+
+```text
+<type>/<description>
+```
+
+Use lowercase alphanumerics with hyphens for word separation. Dots are allowed for release versions. Avoid spaces, underscores, uppercase letters, consecutive separators, and leading or trailing separators.
+
+Common prefixes:
+
+- `feature/` or `feat/` for new features, for example `feat/add-login-page`.
+- `bugfix/` or `fix/` for bug fixes, for example `fix/header-bug`.
+- `hotfix/` for urgent fixes, for example `hotfix/security-patch`.
+- `release/` for release preparation, for example `release/v1.2.0`.
+- `chore/` for non-feature work, for example `chore/update-dependencies`.
+- Agent prefixes such as `ai/`, `copilot/`, `cursor/`, `claude/`, or `codex/` are allowed when they make the branch owner or workflow clearer.
+
+Include ticket numbers when useful, for example `feat/issue-123-new-login`.
+
+#### Conventional Commits
+
+Use commit messages that clearly communicate intent and support changelog generation, semantic versioning, automation, and code review.
+
+Commit messages should use this structure:
+
+```text
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+Use `feat:` for new features and `fix:` for bug fixes. Other types such as `build:`, `chore:`, `ci:`, `docs:`, `style:`, `refactor:`, `perf:`, and `test:` are allowed when they describe the change better.
+
+Use an optional scope for context, for example `feat(parser): add array parsing`. Mark breaking changes with `!` before the colon or a `BREAKING CHANGE:` footer.
+
+Examples:
+
+- `feat: add login page`
+- `fix(auth): handle expired tokens`
+- `docs: correct changelog spelling`
+- `feat(api)!: remove deprecated endpoint`
+- `refactor: simplify request retry logic`
 
 ## Rule 7: Accuracy
 
