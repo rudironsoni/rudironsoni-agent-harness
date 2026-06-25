@@ -66,6 +66,26 @@ rulesync generate --check
 Commit source changes and generated outputs together when they belong to the
 same logical change. Keep unrelated generated churn out of focused commits.
 
+Use Conventional Commits for commit messages and Conventional Branch names for
+branches unless the target repository has a clearly established different
+convention.
+
+- Commit messages follow `type(scope): description`, for example
+  `docs: update agent workflow` or `feat(rules): add naming convention`.
+- Branch names follow `<type>/<description>`, for example
+  `feat/add-login-page`, `fix/header-bug`, `chore/update-dependencies`, or
+  `release/v1.2.0`.
+- Mark breaking commits with `!` before the colon or a `BREAKING CHANGE:`
+  footer.
+
+For git worktrees, keep worktree directories outside the repository in a sibling
+`<repo-name>.worktrees/` directory. Name each worktree
+`<repo-name>-<branch-folder>`, where `<branch-folder>` is the branch name lowercased
+with `/` replaced by `-`. Generated branch names should use a Jira-prefixed
+lowercase kebab-case name when a Jira key is known, otherwise use Conventional
+Branch format. Always validate branch names with `git check-ref-format --branch`
+before creating a worktree.
+
 ### Install A Package Into Another Repository
 
 This repository contains multiple RuleSync packages. Each package is aimed at a

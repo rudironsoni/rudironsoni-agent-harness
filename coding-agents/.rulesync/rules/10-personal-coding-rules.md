@@ -80,6 +80,19 @@ Common prefixes:
 
 Include ticket numbers when useful, for example `feat/issue-123-new-login`.
 
+#### Worktree Preferences
+
+When creating git worktrees, place them in a sibling directory named after the repository with a `.worktrees` suffix.
+
+- Resolve the repository root with `git rev-parse --show-toplevel`.
+- Use `<repo-parent>/<repo-name>.worktrees` as the worktree parent directory.
+- Use `<repo-name>-<branch-folder>` as the worktree folder name.
+- Derive `<branch-folder>` from the branch name by lowercasing it and replacing `/` with `-`.
+
+Generated branch names must be a single valid git branch name with no whitespace, no `..`, no leading `.`, no trailing `.`, and no `.lock` suffix. Validate names with `git check-ref-format --branch` before creating the worktree.
+
+When generating a branch name, prefer the repository's ticket-aware convention if a Jira key is known, using `<jira>-<lowercase-kebab-description>`. Otherwise use Conventional Branch format with one of `build/`, `chore/`, `ci/`, `docs/`, `feat/`, `fix/`, `perf/`, `refactor/`, `revert/`, `style/`, or `test/`.
+
 #### Conventional Commits
 
 Use commit messages that clearly communicate intent and support changelog generation, semantic versioning, automation, and code review.
