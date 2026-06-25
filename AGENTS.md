@@ -96,6 +96,27 @@ git status --short
 
 Call out generated output separately from source edits in summaries. Do not claim RuleSync validation unless `rulesync generate --check` was actually run.
 
+## Git Naming Conventions
+
+Use Conventional Commits for commit messages and Conventional Branch names for branches unless an edited downstream repository has a clearly established different convention.
+
+- Commit messages follow `type(scope): description`, with `feat:` for features, `fix:` for bug fixes, and types such as `docs:`, `chore:`, `refactor:`, `test:`, `ci:`, and `build:` when appropriate.
+- Branch names follow `<type>/<description>`, using lowercase alphanumerics and hyphens, for example `feat/add-login-page`, `fix/header-bug`, `chore/update-dependencies`, or `release/v1.2.0`.
+- Mark breaking commits with `!` before the colon or a `BREAKING CHANGE:` footer.
+
+## Worktree Preferences
+
+When creating git worktrees, place them in a sibling directory named after the repository with a `.worktrees` suffix.
+
+- Resolve the repository root with `git rev-parse --show-toplevel`.
+- Use `<repo-parent>/<repo-name>.worktrees` as the worktree parent directory.
+- Use `<repo-name>-<branch-folder>` as the worktree folder name.
+- Derive `<branch-folder>` from the branch name by lowercasing it and replacing `/` with `-`.
+
+Generated branch names must be a single valid git branch name with no whitespace, no `..`, no leading `.`, no trailing `.`, and no `.lock` suffix. Validate names with `git check-ref-format --branch` before creating the worktree.
+
+When generating a branch name, prefer the repository's ticket-aware convention if a Jira key is known, using `<jira>-<lowercase-kebab-description>`. Otherwise use Conventional Branch format with one of `build/`, `chore/`, `ci/`, `docs/`, `feat/`, `fix/`, `perf/`, `refactor/`, `revert/`, `style/`, or `test/`.
+
 ## Root Files
 
 Root-level files describe repository-wide policy:
@@ -118,3 +139,5 @@ This repository is intended to stay public-safe.
 - Use environment variables or local credential stores for MCP credentials.
 - Keep local runtime files in ignored paths.
 - Preserve user changes you did not make; never reset or revert unrelated work without explicit permission.
+
+
