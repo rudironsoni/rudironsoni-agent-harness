@@ -11,7 +11,13 @@
       "*"
     ],
     "claudecode": [
-      "*"
+      "rules",
+      "ignore",
+      "mcp",
+      "commands",
+      "subagents",
+      "skills",
+      "hooks"
     ],
     "opencode": [
       "*"
@@ -20,6 +26,14 @@
       "*"
     ],
     "codexcli": [
+      "rules",
+      "mcp",
+      "commands",
+      "subagents",
+      "skills",
+      "hooks"
+    ],
+    "hermesagent": [
       "*"
     ]
   },
