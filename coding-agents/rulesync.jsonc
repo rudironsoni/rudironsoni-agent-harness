@@ -61,9 +61,6 @@
       "source": "kepano/obsidian-skills"
     },
     {
-      "source": "cocoindex-io/cocoindex-code"
-    },
-    {
       "source": "https://github.com/blader/humanizer",
       "transport": "git",
       "path": ".",
