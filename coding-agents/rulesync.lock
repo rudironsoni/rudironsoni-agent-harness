@@ -33,16 +33,6 @@
         }
       }
     },
-    "cocoindex-io/cocoindex-code": {
-      "requestedRef": "main",
-      "resolvedRef": "a18a0ee0f6417593b66643e123a411db96ae7d57",
-      "resolvedAt": "2026-06-22T09:16:34.412Z",
-      "skills": {
-        "ccc": {
-          "integrity": "sha256-e16e05ce4e22a925dff59cb1bb1e2b152f39a367f448536ab283f10c8a31acdf"
-        }
-      }
-    },
     "blader/humanizer": {
       "requestedRef": "main",
       "resolvedRef": "9600f2b7241cb4eed6ad803abee5ea01d67fe8e4",
