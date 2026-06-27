@@ -4,7 +4,9 @@
     "copilot",
     "cursor",
     "claudecode",
-    "codexcli"
+    "codexcli",
+    "opencode",
+    "antigravity-ide"
   ],
   "features": [
     "rules",
@@ -25,5 +27,16 @@
   "simulateCommands": false,
   "simulateSubagents": false,
   "simulateSkills": false,
-  "gitignoreTargetsOnly": true
+  "gitignoreTargetsOnly": true,
+  "sources": [
+    {
+      "source": "davidvkimball/obsidian-dev-skills:.",
+      "skills": [
+        "obsidian-dev",
+        "obsidian-ops",
+        "obsidian-ref",
+        "obsidian-theme-dev"
+      ]
+    }
+  ]
 }

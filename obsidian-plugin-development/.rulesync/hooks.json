@@ -1,10 +1,22 @@
 {
   "version": 1,
   "hooks": {
+    "sessionStart": [
+      {
+        "type": "command",
+        "command": "echo 'obsidian plugin development harness active | desktop + mobile emulation | MCPs: obsidian-cli, electron-devtools'"
+      }
+    ],
+    "preToolUse": [
+      {
+        "matcher": "Bash",
+        "command": "echo 'Executing bash command. Reuse the existing Obsidian instance, avoid destructive vault or release artifact operations.'"
+      }
+    ],
     "postToolUse": [
       {
         "matcher": "Write|Edit",
-        "command": ".rulesync/hooks/format.sh"
+        "command": "rtk git diff --name-only | rtk grep '\\.ts$' >/dev/null && rtk npm run typecheck || true"
       }
     ]
   }
