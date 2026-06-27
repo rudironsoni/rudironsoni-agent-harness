@@ -79,7 +79,9 @@ __pycache__/
 **/.warp/
 **/.windsurf/
 **/.zed/
+**/.github/agents/
 **/.github/copilot-instructions.md
+**/.github/prompts/
 **/.github/skills/
 **/.github/hooks/
 **/.mcp.json
