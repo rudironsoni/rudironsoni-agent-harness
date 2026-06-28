@@ -354,10 +354,6 @@
       "netrc": "deny",
       ".aws/credentials": "deny",
       ".docker/config.json": "deny"
-    },
-    "webfetch": {
-      "github.com": "allow",
-      "ssh.github.com": "allow"
     }
   }
 }
