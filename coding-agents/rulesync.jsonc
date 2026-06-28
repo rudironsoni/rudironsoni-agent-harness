@@ -17,7 +17,8 @@
       "commands",
       "subagents",
       "skills",
-      "hooks"
+      "hooks",
+      "permissions"
     ],
     "opencode": [
       "*"
@@ -31,10 +32,8 @@
       "commands",
       "subagents",
       "skills",
-      "hooks"
-    ],
-    "hermesagent": [
-      "*"
+      "hooks",
+      "permissions"
     ]
   },
   "outputRoots": [
