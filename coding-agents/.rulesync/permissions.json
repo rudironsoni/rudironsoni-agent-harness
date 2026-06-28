@@ -204,6 +204,14 @@
       "rtk git commit*": "allow",
       "git push*": "allow",
       "rtk git push*": "allow",
+      "git push": "allow",
+      "rtk git push": "allow",
+      "git push --force-with-lease": "allow",
+      "rtk git push --force-with-lease": "allow",
+      "git push --force": "deny",
+      "rtk git push --force": "deny",
+      "git push -f": "deny",
+      "rtk git push -f": "deny",
       "git fetch*": "allow",
       "rtk git fetch*": "allow",
       "git pull*": "allow",
@@ -346,6 +354,10 @@
       "netrc": "deny",
       ".aws/credentials": "deny",
       ".docker/config.json": "deny"
+    },
+    "webfetch": {
+      "github.com": "allow",
+      "ssh.github.com": "allow"
     }
   }
 }

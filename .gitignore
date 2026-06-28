@@ -15,6 +15,8 @@
 # Local agent/session metadata
 .serena/
 **/.serena/
+.tokensave/
+**/.tokensave/
 **/.claude/settings.local.json
 
 # Local runtime/config generated during assistant setup
