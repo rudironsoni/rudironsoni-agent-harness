@@ -21,7 +21,12 @@
       "permissions"
     ],
     "opencode": [
-      "*"
+      "rules",
+      "mcp",
+      "commands",
+      "subagents",
+      "skills",
+      "hooks"
     ],
     "copilotcli": [
       "*"
