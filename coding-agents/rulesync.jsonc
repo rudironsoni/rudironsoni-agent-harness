@@ -62,9 +62,6 @@
       ]
     },
     {
-      "source": "kepano/obsidian-skills"
-    },
-    {
       "source": "https://github.com/blader/humanizer",
       "transport": "git",
       "path": ".",
