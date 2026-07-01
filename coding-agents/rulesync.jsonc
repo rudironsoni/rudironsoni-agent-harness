@@ -1,14 +1,16 @@
 {
   "$schema": "https://github.com/dyoshikawa/rulesync/releases/latest/download/config-schema.json",
   "targets": {
-    "agentsmd": [
-      "*"
-    ],
     "agentsskills": [
-      "*"
+      "skills"
     ],
     "cursor": [
-      "*"
+      "ignore",
+      "mcp",
+      "commands",
+      "subagents",
+      "skills",
+      "hooks"
     ],
     "claudecode": [
       "rules",
@@ -17,8 +19,7 @@
       "commands",
       "subagents",
       "skills",
-      "hooks",
-      "permissions"
+      "hooks"
     ],
     "opencode": [
       "rules",
@@ -29,7 +30,11 @@
       "hooks"
     ],
     "copilotcli": [
-      "*"
+      "rules",
+      "mcp",
+      "subagents",
+      "skills",
+      "hooks"
     ],
     "codexcli": [
       "rules",
@@ -37,8 +42,7 @@
       "commands",
       "subagents",
       "skills",
-      "hooks",
-      "permissions"
+      "hooks"
     ]
   },
   "outputRoots": [
